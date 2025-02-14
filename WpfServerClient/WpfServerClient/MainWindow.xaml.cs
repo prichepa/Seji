@@ -52,9 +52,28 @@ namespace WpfServerClient
             }
         }
 
+        private void logInBtn_Click(object sender, RoutedEventArgs e)
+        {
+            logInSignUpGrid.Visibility = Visibility.Hidden;
+        }
+
+        private void signUpBtn_Click(object sender, RoutedEventArgs e)
+        {
+            logInSignUpGrid.Visibility = Visibility.Hidden;
+        }
+
         public MainWindow()
         {
             InitializeComponent();
+
+            var bi = new BitmapImage();
+            bi.BeginInit();
+            bi.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+            bi.CacheOption = BitmapCacheOption.OnLoad;
+            bi.UriSource = new Uri("background.jpg", UriKind.RelativeOrAbsolute);
+            bi.EndInit();
+
+            bgImage.Source = bi;
 
             try
             {

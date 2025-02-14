@@ -18,6 +18,23 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
+        <Grid x:Name="logInSignUpGrid" Background="Aquamarine" Grid.ColumnSpan="3" Grid.RowSpan="3" Panel.ZIndex="1">
+            <Image x:Name="bgImage" Stretch="Fill"/>
+
+            <Grid Width="440" Height="200">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Button x:Name="logInBtn" Click="logInBtn_Click" Grid.Column="0" Grid.Row="1" Margin="20 30 10 30" Content="Log in" FontSize="18"/>
+                <Button x:Name="signUpBtn" Click="signUpBtn_Click" Grid.Column="1" Grid.Row="1" Margin="10 30 20 30" Content="Sign up" FontSize="18"/>
+            </Grid>
+        </Grid>
+
         <Label x:Name="labelChatName" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"
            Content="Chat" FontSize="22" FontWeight="Bold" Foreground="DarkGray"/>
         <ListView x:Name="lvChats" Grid.Row="0" Grid.RowSpan="3" Background="LightGray" Margin="10" FontSize="18"/>

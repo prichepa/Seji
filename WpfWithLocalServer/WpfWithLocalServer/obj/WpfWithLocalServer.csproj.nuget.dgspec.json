@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\WpfWithLocalServer\\WpfWithLocalServer\\WpfWithLocalServer.csproj": {}
+    "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\Seji\\WpfWithLocalServer\\WpfWithLocalServer\\WpfWithLocalServer.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\WpfWithLocalServer\\WpfWithLocalServer\\WpfWithLocalServer.csproj": {
+    "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\Seji\\WpfWithLocalServer\\WpfWithLocalServer\\WpfWithLocalServer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\WpfWithLocalServer\\WpfWithLocalServer\\WpfWithLocalServer.csproj",
+        "projectUniqueName": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\Seji\\WpfWithLocalServer\\WpfWithLocalServer\\WpfWithLocalServer.csproj",
         "projectName": "WpfWithLocalServer",
-        "projectPath": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\WpfWithLocalServer\\WpfWithLocalServer\\WpfWithLocalServer.csproj",
+        "projectPath": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\Seji\\WpfWithLocalServer\\WpfWithLocalServer\\WpfWithLocalServer.csproj",
         "packagesPath": "C:\\Users\\Gipopotamus\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\WpfWithLocalServer\\WpfWithLocalServer\\obj\\",
+        "outputPath": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\Seji\\WpfWithLocalServer\\WpfWithLocalServer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Gipopotamus\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -1,17 +1,17 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\WpfServerClient\\",
+  "WorkspaceRootPath": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\Seji\\WpfServerClient\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FC2448DC-0F22-4166-8CBA-DA1490704B77}|WpfServerClient\\WpfServerClient.csproj|c:\\users\\gipopotamus\\desktop\\cherepok\\kpi\\messangerproject\\wpfserverclient\\wpfserverclient\\serverclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FC2448DC-0F22-4166-8CBA-DA1490704B77}|WpfServerClient\\WpfServerClient.csproj|solutionrelative:wpfserverclient\\serverclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FC2448DC-0F22-4166-8CBA-DA1490704B77}|WpfServerClient\\WpfServerClient.csproj|c:\\users\\gipopotamus\\desktop\\cherepok\\kpi\\messangerproject\\wpfserverclient\\wpfserverclient\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{FC2448DC-0F22-4166-8CBA-DA1490704B77}|WpfServerClient\\WpfServerClient.csproj|c:\\users\\gipopotamus\\desktop\\cherepok\\kpi\\messangerproject\\seji\\wpfserverclient\\wpfserverclient\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FC2448DC-0F22-4166-8CBA-DA1490704B77}|WpfServerClient\\WpfServerClient.csproj|solutionrelative:wpfserverclient\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FC2448DC-0F22-4166-8CBA-DA1490704B77}|WpfServerClient\\WpfServerClient.csproj|c:\\users\\gipopotamus\\desktop\\cherepok\\kpi\\messangerproject\\wpfserverclient\\wpfserverclient\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{FC2448DC-0F22-4166-8CBA-DA1490704B77}|WpfServerClient\\WpfServerClient.csproj|c:\\users\\gipopotamus\\desktop\\cherepok\\kpi\\messangerproject\\seji\\wpfserverclient\\wpfserverclient\\serverclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FC2448DC-0F22-4166-8CBA-DA1490704B77}|WpfServerClient\\WpfServerClient.csproj|solutionrelative:wpfserverclient\\serverclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FC2448DC-0F22-4166-8CBA-DA1490704B77}|WpfServerClient\\WpfServerClient.csproj|c:\\users\\gipopotamus\\desktop\\cherepok\\kpi\\messangerproject\\seji\\wpfserverclient\\wpfserverclient\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{FC2448DC-0F22-4166-8CBA-DA1490704B77}|WpfServerClient\\WpfServerClient.csproj|solutionrelative:wpfserverclient\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
@@ -28,37 +28,39 @@
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "MainWindow.xaml",
-              "DocumentMoniker": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\WpfServerClient\\WpfServerClient\\MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\Seji\\WpfServerClient\\WpfServerClient\\MainWindow.xaml",
               "RelativeDocumentMoniker": "WpfServerClient\\MainWindow.xaml",
-              "ToolTip": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\WpfServerClient\\WpfServerClient\\MainWindow.xaml",
+              "ToolTip": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\Seji\\WpfServerClient\\WpfServerClient\\MainWindow.xaml",
               "RelativeToolTip": "WpfServerClient\\MainWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-02-08T14:06:54.25Z"
+              "WhenOpened": "2025-02-08T14:06:54.25Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ServerClient.cs",
-              "DocumentMoniker": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\WpfServerClient\\WpfServerClient\\ServerClient.cs",
-              "RelativeDocumentMoniker": "WpfServerClient\\ServerClient.cs",
-              "ToolTip": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\WpfServerClient\\WpfServerClient\\ServerClient.cs",
-              "RelativeToolTip": "WpfServerClient\\ServerClient.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAACgAAAAkAAAAAAAAAA==",
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\Seji\\WpfServerClient\\WpfServerClient\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "WpfServerClient\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\Seji\\WpfServerClient\\WpfServerClient\\MainWindow.xaml.cs",
+              "RelativeToolTip": "WpfServerClient\\MainWindow.xaml.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAAAD0AAAA7AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-08T14:17:55.722Z",
+              "WhenOpened": "2025-02-09T19:42:00.069Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\WpfServerClient\\WpfServerClient\\MainWindow.xaml.cs",
-              "RelativeDocumentMoniker": "WpfServerClient\\MainWindow.xaml.cs",
-              "ToolTip": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\WpfServerClient\\WpfServerClient\\MainWindow.xaml.cs",
-              "RelativeToolTip": "WpfServerClient\\MainWindow.xaml.cs",
-              "ViewState": "AgIAACQAAAAAAAAAAAAAAAEAAAASAAAAAAAAAA==",
+              "Title": "ServerClient.cs",
+              "DocumentMoniker": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\Seji\\WpfServerClient\\WpfServerClient\\ServerClient.cs",
+              "RelativeDocumentMoniker": "WpfServerClient\\ServerClient.cs",
+              "ToolTip": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\Seji\\WpfServerClient\\WpfServerClient\\ServerClient.cs",
+              "RelativeToolTip": "WpfServerClient\\ServerClient.cs",
+              "ViewState": "AgIAADwAAAAAAAAAAAAAAFAAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-09T19:42:00.069Z"
+              "WhenOpened": "2025-02-08T14:17:55.722Z",
+              "EditorCaption": ""
             }
           ]
         }

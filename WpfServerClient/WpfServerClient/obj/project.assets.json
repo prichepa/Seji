@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\WpfServerClient\\WpfServerClient\\WpfServerClient.csproj",
+      "projectUniqueName": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\Seji\\WpfServerClient\\WpfServerClient\\WpfServerClient.csproj",
       "projectName": "WpfServerClient",
-      "projectPath": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\WpfServerClient\\WpfServerClient\\WpfServerClient.csproj",
+      "projectPath": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\Seji\\WpfServerClient\\WpfServerClient\\WpfServerClient.csproj",
       "packagesPath": "C:\\Users\\Gipopotamus\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\WpfServerClient\\WpfServerClient\\obj\\",
+      "outputPath": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\Seji\\WpfServerClient\\WpfServerClient\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Gipopotamus\\AppData\\Roaming\\NuGet\\NuGet.Config",
