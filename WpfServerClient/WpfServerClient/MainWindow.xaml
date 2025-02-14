@@ -1,0 +1,29 @@
+﻿<Window x:Class="WpfServerClient.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfServerClient"
+        mc:Ignorable="d"
+        Title="Seji" Height="450" Width="1000">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.12*"/>
+            <RowDefinition />
+            <RowDefinition Height="0.15*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.3*"/>
+            <ColumnDefinition Width="36"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Label x:Name="labelChatName" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"
+           Content="Chat" FontSize="22" FontWeight="Bold" Foreground="DarkGray"/>
+        <ListView x:Name="lvChats" Grid.Row="0" Grid.RowSpan="3" Background="LightGray" Margin="10" FontSize="18"/>
+        <ListView x:Name="lvChat" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Background="LightGoldenrodYellow" Margin="10" FontSize="18" VirtualizingPanel.ScrollUnit="Pixel" VirtualizingPanel.IsVirtualizing="True"/>
+        <Button x:Name="fileBtn" Content="P" Grid.Row="2" Grid.Column="1" Click="fileBtn_Click" Margin="10 0 0 1" Width="26" Height="26"/>
+        <TextBox x:Name="tbMessage" Grid.Row="2" Grid.Column="2" Margin="10 0 10 2" FontSize="18" VerticalAlignment="Center" Padding="0 2 0 2" KeyDown="Window_KeyDown"/>
+        <TextBlock x:Name="tBlockText" Grid.Row="2" Grid.Column="2" Text=" Введіть повідомлення..." IsHitTestVisible="False" Foreground="DarkGray" Margin="10 0 10 2" FontSize="18" VerticalAlignment="Center" Padding="0 2 0 2"/>
+    </Grid>
+</Window>
