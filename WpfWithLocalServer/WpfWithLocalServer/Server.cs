@@ -49,19 +49,12 @@ namespace WpfWithLocalServer
             }
         }
 
-        public static Client FillClient(Socket? clientSocket, string? login)
+        public static Client FillClient(Socket? clientSocket, User user)
         {
             Client client = new Client();
-            Random random = new Random();
 
-            client.Login = login;
             client.Socket = clientSocket;
-            client.DateOfConnection = DateTime.Now;
-            client.ColorBrush = new SolidColorBrush(Color.FromRgb(
-                (byte)random.Next(0, 255),
-                (byte)random.Next(0, 255),
-                (byte)random.Next(0, 255)
-                ));
+            client.User = user;
 
             return client;
         }
@@ -80,21 +73,66 @@ namespace WpfWithLocalServer
                 {
                     if (!clientFilled)
                     {
-                        string login = Encoding.UTF8.GetString(buffer, 0, bytesCount);
-                        client = FillClient(clientSocket, login);
-                        clients.Add(client);
-                        clientFilled = true;
+                        string loginNPassword = Encoding.UTF8.GetString(buffer, 0, bytesCount);
+                        int loginLength = Convert.ToInt32(loginNPassword.Substring(0, loginNPassword.IndexOf('.')));
+                        string login = loginNPassword.Substring(loginNPassword.IndexOf('.') + 1, loginNPassword.IndexOf('.') + loginLength - 1);
+                        string password = loginNPassword.Substring(loginNPassword.IndexOf('.') + 1 + loginLength);
+                        password = password[..^1];
+                        char entrType = loginNPassword[loginNPassword.Length - 1];
 
-                        Window?.Dispatcher.Invoke(() => Window?.lvClients.Items.Add(client));
-                        Window?.Dispatcher.Invoke(() => Window?.lvChat.Items.Add($"{DateTime.Now} connected {client.Login}"));
-                        Window?.Dispatcher.Invoke(() => Window?.lvChat?.ScrollIntoView($"{DateTime.Now} connected {client.Login}"));
-                        Window?.Dispatcher.Invoke(() => Window.labelClients.Content = $"Clients: {clients.Count}");
+                        if(entrType == 's')
+                        {
+                            Random random = new Random();
+                            var color = new SolidColorBrush(Color.FromRgb(
+                                (byte)random.Next(0, 255),
+                                (byte)random.Next(0, 255),
+                                (byte)random.Next(0, 255)
+                            ));
+
+                            if (WorkWithDB.AddUser(login, password, color))
+                            {
+                                clientSocket.Send(Encoding.UTF8.GetBytes(Convert.ToString(1)));
+
+                                client = FillClient(clientSocket, WorkWithDB.currentUser);
+                                clients.Add(client);
+                                clientFilled = true;
+
+                                Window?.Dispatcher.Invoke(() => Window?.lvClients.Items.Add(client.User.Login));
+                                Window?.Dispatcher.Invoke(() => Window?.lvChat.Items.Add($"{DateTime.Now} connected {client.User.Login}"));
+                                Window?.Dispatcher.Invoke(() => Window?.lvChat?.ScrollIntoView($"{DateTime.Now} connected {client.User.Login}"));
+                                Window?.Dispatcher.Invoke(() => Window.labelClients.Content = $"Clients: {clients.Count}");
+                            }
+                            else
+                            {
+                                clientSocket.Send(Encoding.UTF8.GetBytes(Convert.ToString(0)));
+                            }
+                        }
+                        else
+                        {
+                            if (WorkWithDB.ConnectUser(login, password))
+                            {
+                                clientSocket.Send(Encoding.UTF8.GetBytes(Convert.ToString(1)));
+
+                                client = FillClient(clientSocket, WorkWithDB.currentUser);
+                                clients.Add(client);
+                                clientFilled = true;
+
+                                Window?.Dispatcher.Invoke(() => Window?.lvClients.Items.Add(client.User.Login));
+                                Window?.Dispatcher.Invoke(() => Window?.lvChat.Items.Add($"{DateTime.Now} connected {client.User.Login}"));
+                                Window?.Dispatcher.Invoke(() => Window?.lvChat?.ScrollIntoView($"{DateTime.Now} connected {client.User.Login}"));
+                                Window?.Dispatcher.Invoke(() => Window.labelClients.Content = $"Clients: {clients.Count}");
+                            }
+                            else
+                            {
+                                clientSocket.Send(Encoding.UTF8.GetBytes(Convert.ToString(0)));
+                            }
+                        }
                     }
                     else
                     {
                         Array.Resize(ref buffer, bytesCount);
 
-                        string colorNLogin = client.ColorBrush.ToString() + client.Login;
+                        string colorNLogin = client.User.ColorBrush.ToString() + client.User.Login;
                         byte[] bColorNLogin = Encoding.ASCII.GetBytes(colorNLogin);
 
                         Array.Resize(ref buffer, buffer.Length + bColorNLogin.Length);
@@ -116,8 +154,6 @@ namespace WpfWithLocalServer
             catch { }
             finally
             {
-                Window?.Dispatcher.Invoke(() => Window?.lvChat.Items.Add($"{DateTime.Now} disconnected {client.Login}"));
-                Window?.Dispatcher.Invoke(() => Window?.lvChat?.ScrollIntoView($"{DateTime.Now} disconnected {client.Login}"));
                 Window?.Dispatcher.Invoke(() => Window?.lvClients.Items.Remove(client));
 
                 clientSocket?.Close();

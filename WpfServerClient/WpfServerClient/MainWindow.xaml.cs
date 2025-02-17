@@ -18,7 +18,17 @@ namespace WpfServerClient
         string? extension = null;
         string? filePath = null;
 
-        private void Window_KeyDown(object sender, KeyEventArgs e)
+        private void Login_KeyDown(object sender, KeyEventArgs e)
+        {
+            loginTBlock.Visibility = Visibility.Hidden;
+        }
+
+        private void Password_KeyDown(object sender, KeyEventArgs e)
+        {
+            passwordTBlock.Visibility = Visibility.Hidden;
+        }
+
+        private void Message_KeyDown(object sender, KeyEventArgs e)
         {
             if (file != null && e.Key == Key.Enter)
             {
@@ -39,6 +49,68 @@ namespace WpfServerClient
             extension = null;
         }
 
+        private void signUpBtn_Click(object sender, RoutedEventArgs e)
+        {
+            string login = loginTBox.Text;
+            string password = passwordTBox.Text;
+
+            if(login != "" && password != "")
+            {
+                try
+                {
+                    if (ServerClient.Start(login, password, 's'))
+                    {
+                        MessageBox.Show("Акаунт створено!");
+                        logInSignUpGrid.Visibility = Visibility.Hidden;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Таке ім'я вже існує!");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    Application.Current.Shutdown();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Заповніть усі поля!");
+            }
+        }
+
+        private void logInBtn_Click(object sender, RoutedEventArgs e)
+        {
+            string login = loginTBox.Text;
+            string password = passwordTBox.Text;
+
+            if (login != "" && password != "")
+            {
+                try
+                {
+                    if (ServerClient.Start(login, password, 'l'))
+                    {
+                        MessageBox.Show("Ви успішно увійшли!");
+                        logInSignUpGrid.Visibility = Visibility.Hidden;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Помилка!");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    Application.Current.Shutdown();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Заповніть усі поля!");
+            }
+        }
+
         private void fileBtn_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog{ };
@@ -50,16 +122,6 @@ namespace WpfServerClient
                 extension = System.IO.Path.GetExtension(filePath);
                 file = System.IO.File.ReadAllBytes(filePath);
             }
-        }
-
-        private void logInBtn_Click(object sender, RoutedEventArgs e)
-        {
-            logInSignUpGrid.Visibility = Visibility.Hidden;
-        }
-
-        private void signUpBtn_Click(object sender, RoutedEventArgs e)
-        {
-            logInSignUpGrid.Visibility = Visibility.Hidden;
         }
 
         public MainWindow()
@@ -74,16 +136,6 @@ namespace WpfServerClient
             bi.EndInit();
 
             bgImage.Source = bi;
-
-            try
-            {
-                ServerClient.Start();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                Application.Current.Shutdown();
-            }
         }
     }
 }

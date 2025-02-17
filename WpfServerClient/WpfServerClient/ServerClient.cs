@@ -23,7 +23,7 @@ namespace WpfServerClient
         static Socket client;
         public static MainWindow? Window { get; set; }
 
-        public static void Start()
+        public static bool Start(string login, string password, char entrType)
         {
             Window = Application.Current.MainWindow as MainWindow;
 
@@ -37,14 +37,25 @@ namespace WpfServerClient
             {
                 client.Connect(new IPEndPoint(IPAddress.Parse("26.10.226.173"), 80));
 
-                byte[] bLogin = Encoding.UTF8.GetBytes("test");
-                client.Send(bLogin);
+                client.Send(Encoding.UTF8.GetBytes(login.Length + "." + login + password + entrType));
 
-                Task.Run(RecieveMessages);
+                byte[] buffer = new byte[1];
+                client.Receive(buffer);
+
+                if (Convert.ToBoolean(Convert.ToInt32(Encoding.UTF8.GetString(buffer))))
+                {
+                    Task.Run(RecieveMessages);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             catch (SocketException ex)
             {
                 Window?.lvChat?.Items.Add(ex.Message);
+                return false;
             }
         }
 

@@ -21,7 +21,7 @@
         <Grid x:Name="logInSignUpGrid" Background="Aquamarine" Grid.ColumnSpan="3" Grid.RowSpan="3" Panel.ZIndex="1">
             <Image x:Name="bgImage" Stretch="Fill"/>
 
-            <Grid Width="440" Height="200">
+            <Grid Width="440" Height="150">
                 <Grid.RowDefinitions>
                     <RowDefinition />
                     <RowDefinition />
@@ -30,8 +30,14 @@
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <Button x:Name="logInBtn" Click="logInBtn_Click" Grid.Column="0" Grid.Row="1" Margin="20 30 10 30" Content="Log in" FontSize="18"/>
-                <Button x:Name="signUpBtn" Click="signUpBtn_Click" Grid.Column="1" Grid.Row="1" Margin="10 30 20 30" Content="Sign up" FontSize="18"/>
+                
+                <Button x:Name="logInBtn" Click="logInBtn_Click" Grid.Column="0" Grid.Row="1" Margin="30 20 10 20" Content="Увійти" FontSize="18"/>
+                <TextBox x:Name="loginTBox" Grid.Column="0" Grid.Row="0" Margin="10 20 10 20" FontSize="18" VerticalAlignment="Center" Padding="0 2 0 2" KeyDown="Login_KeyDown"/>
+                <TextBlock x:Name="loginTBlock" Grid.Row="0" Grid.Column="0" Text=" Логін" IsHitTestVisible="False" Foreground="DarkGray" Margin="10 0 10 0" FontSize="18" VerticalAlignment="Center"/>
+
+                <Button x:Name="signUpBtn" Click="signUpBtn_Click" Grid.Column="1" Grid.Row="1" Margin="10 20 30 20" Content="Зареєструватися" FontSize="18"/>
+                <TextBox x:Name="passwordTBox" Grid.Column="1" Grid.Row="0" Margin="10 20 10 20" FontSize="18" VerticalAlignment="Center" Padding="0 2 0 2" KeyDown="Password_KeyDown"/>
+                <TextBlock x:Name="passwordTBlock" Grid.Row="0" Grid.Column="1" Text=" Пароль" IsHitTestVisible="False" Foreground="DarkGray" Margin="10 0 10 0" FontSize="18" VerticalAlignment="Center"/>
             </Grid>
         </Grid>
 
@@ -40,7 +46,7 @@
         <ListView x:Name="lvChats" Grid.Row="0" Grid.RowSpan="3" Background="LightGray" Margin="10" FontSize="18"/>
         <ListView x:Name="lvChat" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Background="LightGoldenrodYellow" Margin="10" FontSize="18" VirtualizingPanel.ScrollUnit="Pixel" VirtualizingPanel.IsVirtualizing="True"/>
         <Button x:Name="fileBtn" Content="P" Grid.Row="2" Grid.Column="1" Click="fileBtn_Click" Margin="10 0 0 1" Width="26" Height="26"/>
-        <TextBox x:Name="tbMessage" Grid.Row="2" Grid.Column="2" Margin="10 0 10 2" FontSize="18" VerticalAlignment="Center" Padding="0 2 0 2" KeyDown="Window_KeyDown"/>
+        <TextBox x:Name="tbMessage" Grid.Row="2" Grid.Column="2" Margin="10 0 10 2" FontSize="18" VerticalAlignment="Center" Padding="0 2 0 2" KeyDown="Message_KeyDown"/>
         <TextBlock x:Name="tBlockText" Grid.Row="2" Grid.Column="2" Text=" Введіть повідомлення..." IsHitTestVisible="False" Foreground="DarkGray" Margin="10 0 10 2" FontSize="18" VerticalAlignment="Center" Padding="0 2 0 2"/>
     </Grid>
 </Window>
