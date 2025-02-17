@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\Seji\\WpfServerClient\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FC2448DC-0F22-4166-8CBA-DA1490704B77}|WpfServerClient\\WpfServerClient.csproj|c:\\users\\gipopotamus\\desktop\\cherepok\\kpi\\messangerproject\\seji\\wpfserverclient\\wpfserverclient\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FC2448DC-0F22-4166-8CBA-DA1490704B77}|WpfServerClient\\WpfServerClient.csproj|solutionrelative:wpfserverclient\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{FC2448DC-0F22-4166-8CBA-DA1490704B77}|WpfServerClient\\WpfServerClient.csproj|c:\\users\\gipopotamus\\desktop\\cherepok\\kpi\\messangerproject\\seji\\wpfserverclient\\wpfserverclient\\serverclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FC2448DC-0F22-4166-8CBA-DA1490704B77}|WpfServerClient\\WpfServerClient.csproj|solutionrelative:wpfserverclient\\serverclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FC2448DC-0F22-4166-8CBA-DA1490704B77}|WpfServerClient\\WpfServerClient.csproj|c:\\users\\gipopotamus\\desktop\\cherepok\\kpi\\messangerproject\\seji\\wpfserverclient\\wpfserverclient\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FC2448DC-0F22-4166-8CBA-DA1490704B77}|WpfServerClient\\WpfServerClient.csproj|solutionrelative:wpfserverclient\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FC2448DC-0F22-4166-8CBA-DA1490704B77}|WpfServerClient\\WpfServerClient.csproj|c:\\users\\gipopotamus\\desktop\\cherepok\\kpi\\messangerproject\\seji\\wpfserverclient\\wpfserverclient\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
@@ -22,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
@@ -37,26 +37,25 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "MainWindow.xaml.cs",
               "DocumentMoniker": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\Seji\\WpfServerClient\\WpfServerClient\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "WpfServerClient\\MainWindow.xaml.cs",
               "ToolTip": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\Seji\\WpfServerClient\\WpfServerClient\\MainWindow.xaml.cs",
               "RelativeToolTip": "WpfServerClient\\MainWindow.xaml.cs",
-              "ViewState": "AgIAAD8AAAAAAAAAAADwv1YAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAADwv00AAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-09T19:42:00.069Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-09T19:42:00.069Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "ServerClient.cs",
               "DocumentMoniker": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\Seji\\WpfServerClient\\WpfServerClient\\ServerClient.cs",
               "RelativeDocumentMoniker": "WpfServerClient\\ServerClient.cs",
               "ToolTip": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\Seji\\WpfServerClient\\WpfServerClient\\ServerClient.cs",
               "RelativeToolTip": "WpfServerClient\\ServerClient.cs",
-              "ViewState": "AgIAACYAAAAAAAAAAADwvy0AAAARAAAAAAAAAA==",
+              "ViewState": "AgIAAJYAAAAAAAAAAADwv6oAAAA7AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-16T23:01:29.967Z",
               "EditorCaption": ""

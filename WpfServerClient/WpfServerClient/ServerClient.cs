@@ -165,7 +165,8 @@ namespace WpfServerClient
                     string extensionColorLogin = result.Substring(result.LastIndexOf('.'));
 
                     byte[] bExtensionColorLogin = Encoding.UTF8.GetBytes(extensionColorLogin);
-                    Array.Resize(ref buffer, bytesCount - extensionColorLogin.Length);
+                    Array.Resize(ref buffer, bytesCount - bExtensionColorLogin.Length);
+                    string sigma = Encoding.UTF8.GetString(buffer);
 
                     string extension = extensionColorLogin.Substring(0, extensionColorLogin.IndexOf('#'));
                     string color = extensionColorLogin.Substring(extensionColorLogin.IndexOf('#') + 1, 9);

@@ -133,10 +133,10 @@ namespace WpfWithLocalServer
                         Array.Resize(ref buffer, bytesCount);
 
                         string colorNLogin = client.User.ColorBrush.ToString() + client.User.Login;
-                        byte[] bColorNLogin = Encoding.ASCII.GetBytes(colorNLogin);
+                        byte[] bColorNLogin = Encoding.UTF8.GetBytes(colorNLogin);
 
                         Array.Resize(ref buffer, buffer.Length + bColorNLogin.Length);
-
+                        string sigma = Encoding.UTF8.GetString(bColorNLogin);
                         for (int i = 0; i < bColorNLogin.Length; i++)
                         {
                             buffer[i + bytesCount] = bColorNLogin[i];
