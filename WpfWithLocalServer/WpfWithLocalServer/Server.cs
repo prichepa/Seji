@@ -97,9 +97,6 @@ namespace WpfWithLocalServer
                                 clients.Add(client);
                                 clientFilled = true;
 
-                                Window?.Dispatcher.Invoke(() => Window?.lvClients.Items.Add(client.User.Login));
-                                Window?.Dispatcher.Invoke(() => Window?.lvChat.Items.Add($"{DateTime.Now} connected {client.User.Login}"));
-                                Window?.Dispatcher.Invoke(() => Window?.lvChat?.ScrollIntoView($"{DateTime.Now} connected {client.User.Login}"));
                                 Window?.Dispatcher.Invoke(() => Window.labelClients.Content = $"Clients: {clients.Count}");
                             }
                             else
@@ -117,9 +114,6 @@ namespace WpfWithLocalServer
                                 clients.Add(client);
                                 clientFilled = true;
 
-                                Window?.Dispatcher.Invoke(() => Window?.lvClients.Items.Add(client.User.Login));
-                                Window?.Dispatcher.Invoke(() => Window?.lvChat.Items.Add($"{DateTime.Now} connected {client.User.Login}"));
-                                Window?.Dispatcher.Invoke(() => Window?.lvChat?.ScrollIntoView($"{DateTime.Now} connected {client.User.Login}"));
                                 Window?.Dispatcher.Invoke(() => Window.labelClients.Content = $"Clients: {clients.Count}");
                             }
                             else
@@ -154,8 +148,6 @@ namespace WpfWithLocalServer
             catch { }
             finally
             {
-                Window?.Dispatcher.Invoke(() => Window?.lvClients.Items.Remove(client));
-
                 clientSocket?.Close();
                 clients.Remove(client);
 

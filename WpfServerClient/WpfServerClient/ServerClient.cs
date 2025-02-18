@@ -15,6 +15,7 @@ using System.IO;
 using System.Dynamic;
 using System.Collections;
 using System.Windows.Media.Imaging;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace WpfServerClient
 {
@@ -63,15 +64,7 @@ namespace WpfServerClient
         {
             try
             {
-                int lengthWithoutExtension = message.Length;
-                byte[] bExtension = Encoding.UTF8.GetBytes(extension);
-
-                Array.Resize(ref message, message.Length + bExtension.Length);
-
-                for (int i = 0; i < bExtension.Length; i++)
-                {
-                    message[i + lengthWithoutExtension] = bExtension[i];
-                }
+                byte[] avatar = File.ReadAllBytes(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "NADA_MNE", "cool_avatarka.jpg"));
 
                 ListViewItem item;
                 if (extension == ".message")
@@ -80,7 +73,6 @@ namespace WpfServerClient
                     Window.tBlockText.Visibility = Visibility.Visible;
 
                     string strMessage = Encoding.UTF8.GetString(message);
-                    strMessage = strMessage[..^8];
 
                     item = new ListViewItem()
                     {
@@ -135,6 +127,26 @@ namespace WpfServerClient
                     Window?.lvChat?.ScrollIntoView(item);
                 }
 
+                byte[] bAvatarLength = Encoding.UTF8.GetBytes("." + Convert.ToString(avatar.Length));
+                Array.Resize(ref avatar, avatar.Length + bAvatarLength.Length);
+                for (int i = 0; i < bAvatarLength.Length; i++)
+                {
+                    avatar[i + avatar.Length - bAvatarLength.Length] = bAvatarLength[i];
+                }
+
+                byte[] bExtension = Encoding.UTF8.GetBytes(extension);
+
+                Array.Resize(ref message, message.Length + bExtension.Length + avatar.Length);
+
+                for (int i = 0; i < avatar.Length; i++)
+                {
+                    message[i + message.Length - avatar.Length - bExtension.Length] = avatar[i];
+                }
+                for (int i = 0; i < bExtension.Length; i++)
+                {
+                    message[i + message.Length - bExtension.Length] = bExtension[i];
+                }
+
                 client.Send(message);
             }
             catch (SocketException ex)
@@ -166,7 +178,6 @@ namespace WpfServerClient
 
                     byte[] bExtensionColorLogin = Encoding.UTF8.GetBytes(extensionColorLogin);
                     Array.Resize(ref buffer, bytesCount - bExtensionColorLogin.Length);
-                    string sigma = Encoding.UTF8.GetString(buffer);
 
                     string extension = extensionColorLogin.Substring(0, extensionColorLogin.IndexOf('#'));
                     string color = extensionColorLogin.Substring(extensionColorLogin.IndexOf('#') + 1, 9);
@@ -177,7 +188,41 @@ namespace WpfServerClient
                     byte green = byte.Parse(color.Substring(4, 2), System.Globalization.NumberStyles.HexNumber);
                     byte blue = byte.Parse(color.Substring(6, 2), System.Globalization.NumberStyles.HexNumber);
 
-                    string message = $"{login}: ";
+                    string avatarLength = Encoding.UTF8.GetString(buffer);
+                    avatarLength = avatarLength.Substring(avatarLength.LastIndexOf('.') + 1);
+                    Array.Resize(ref buffer, buffer.Length - avatarLength.Length - 1);
+
+                    byte[] avatar = new byte[Convert.ToInt32(avatarLength)];
+                    for (int i = 0; i < avatar.Length; i++)
+                    {
+                        avatar[i] = buffer[buffer.Length - avatar.Length + i];
+                    }
+                    Window?.Dispatcher.Invoke(() =>
+                    {
+                        string[] files = Directory.GetFiles(folderPath);
+                        string filePath = Path.Combine(folderPath, $"file({files.Length}).jpg");
+                        File.WriteAllBytes(filePath, avatar);
+
+                        StackPanel panel = new StackPanel { Orientation = Orientation.Horizontal };
+
+                        Image img = new Image();
+                        img.Source = new BitmapImage(new Uri(filePath, UriKind.Absolute));
+                        img.Width = 20;
+
+                        TextBlock textBlock = new TextBlock { Text = $"{login}: ", Margin = new Thickness(5, 0, 0, 0) };
+
+                        panel.Children.Add(img);
+                        panel.Children.Add(textBlock);
+
+                        ListViewItem item = new ListViewItem();
+                        item.Content = panel;
+
+                        Window?.lvChat?.Items.Add(item);
+                    });
+
+                    Array.Resize(ref buffer, buffer.Length - Convert.ToInt32(avatarLength));
+
+                    string message = "";
                     if (extension == ".message")
                     {
                         message += Encoding.UTF8.GetString(buffer);
