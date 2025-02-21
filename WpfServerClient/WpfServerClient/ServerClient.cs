@@ -1,23 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Sockets;
+﻿using System.Net.Sockets;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows;
 using System.Windows.Media;
-using System.Windows.Input;
-using System.Drawing;
-using System.Windows.Interop;
 using System.IO;
-using System.Dynamic;
-using System.Collections;
 using System.Windows.Media.Imaging;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using System.Media;
-using System.Numerics;
 
 namespace WpfServerClient
 {
@@ -107,7 +95,8 @@ namespace WpfServerClient
                     item = new ListViewItem { HorizontalContentAlignment = HorizontalAlignment.Right };
                     Image img = new Image();
                     img.Source = new BitmapImage(new Uri(filePath, UriKind.Absolute));
-                    img.Height = 200;
+                    img.MaxHeight = 350;
+                    img.MaxWidth = 350;
                     item.Content = img;
 
                     Window?.lvChat?.Items.Add(item);
@@ -119,7 +108,8 @@ namespace WpfServerClient
                     {
                         Source = new Uri(filePath, UriKind.Absolute),
                         LoadedBehavior = MediaState.Manual,
-                        Height = 200
+                        MaxHeight = 350,
+                        MaxWidth = 350
                     };
                     media.Pause();
 
@@ -128,7 +118,7 @@ namespace WpfServerClient
                     {
                         panel = new StackPanel { Orientation = Orientation.Horizontal };
 
-                        TextBlock textBlock = new TextBlock { Text = "▶", Margin = new Thickness(0, 0, 0, 5) };
+                        TextBlock textBlock = new TextBlock { Text = "▶", FontFamily = new FontFamily("Segoe UI Emoji") };
 
                         media.Height = 0;
 
@@ -274,7 +264,8 @@ namespace WpfServerClient
                                 ListViewItem item = new ListViewItem();
                                 Image img = new Image();
                                 img.Source = new BitmapImage(new Uri(filePath, UriKind.Absolute));
-                                img.Height = 200;
+                                img.MaxHeight = 350;
+                                img.MaxWidth = 350;
                                 item.Content = img;
 
                                 Window?.lvChat?.Items.Add(item);
@@ -289,7 +280,8 @@ namespace WpfServerClient
                                 {
                                     Source = new Uri(filePath, UriKind.Absolute),
                                     LoadedBehavior = MediaState.Manual,
-                                    Height = 200
+                                    MaxHeight = 350,
+                                    MaxWidth = 350
                                 };
                                 media.Pause();
 
@@ -299,7 +291,7 @@ namespace WpfServerClient
                                 {
                                     panel = new StackPanel { Orientation = Orientation.Horizontal };
 
-                                    TextBlock textBlock = new TextBlock { Text = "▶", Margin = new Thickness(0, 0, 0, 5) };
+                                    TextBlock textBlock = new TextBlock { Text = "▶", FontFamily = new FontFamily("Segoe UI Emoji") };
 
                                     media.Height = 0;
 
@@ -364,7 +356,7 @@ namespace WpfServerClient
                         if (extension == ".mp3")
                         {
                             panel.Children.Clear();
-                            TextBlock textBlock = new TextBlock { Text = "▶", Margin = new Thickness(0, 0, 0, 5) };
+                            TextBlock textBlock = new TextBlock { Text = "▶", FontFamily = new FontFamily("Segoe UI Emoji") };
 
                             panel.Children.Add(textBlock);
                             panel.Children.Add(media);
@@ -380,7 +372,7 @@ namespace WpfServerClient
                         if (extension == ".mp3")
                         {
                             panel.Children.Clear();
-                            TextBlock textBlock = new TextBlock { Text = "⏸", Margin = new Thickness(0, 0, 0, 5) };
+                            TextBlock textBlock = new TextBlock { Text = "⏸" };
 
                             panel.Children.Add(textBlock);
                             panel.Children.Add(media);
