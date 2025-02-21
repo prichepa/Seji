@@ -18,9 +18,9 @@ namespace WpfWithLocalServer
                                   Encrypt=False;
                                   TrustServerCertificate=True");
 
-        public static bool AddUser(string login, string password, SolidColorBrush color)
+        public static bool AddUser(string login, string password, byte[] avatar, SolidColorBrush color)
         {
-            User user = new User() { Login = login, Password = password, ColorBrush = color.ToString() };
+            User user = new User() { Login = login, Password = password, Avatar = avatar, ColorBrush = color.ToString() };
             currentUser = user;
 
             try

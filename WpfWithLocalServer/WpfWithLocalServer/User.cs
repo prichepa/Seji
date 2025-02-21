@@ -13,7 +13,7 @@ namespace WpfWithLocalServer
         public int Id { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
-        public byte[]? Avatar { get; set; }
+        public byte[] Avatar { get; set; }
         public string? ColorBrush { get; set; }
         public int? ChatId { get; set; }
     }

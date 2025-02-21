@@ -18,6 +18,20 @@ namespace WpfServerClient
         string? extension = null;
         string? filePath = null;
 
+        public MainWindow()
+        {
+            InitializeComponent();
+
+            var bi = new BitmapImage();
+            bi.BeginInit();
+            bi.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+            bi.CacheOption = BitmapCacheOption.OnLoad;
+            bi.UriSource = new Uri("background.jpg", UriKind.RelativeOrAbsolute);
+            bi.EndInit();
+
+            bgImage.Source = bi;
+        }
+
         private void Login_KeyDown(object sender, KeyEventArgs e)
         {
             loginTBlock.Visibility = Visibility.Hidden;
@@ -44,7 +58,7 @@ namespace WpfServerClient
             {
                 tBlockText.Visibility = Visibility.Hidden;
             }
-            
+
             file = null;
             extension = null;
         }
@@ -54,18 +68,21 @@ namespace WpfServerClient
             string login = loginTBox.Text;
             string password = passwordTBox.Text;
 
-            if(login != "" && password != "")
+            if (login != "" && password != "" && file != null)
             {
                 try
                 {
-                    if (ServerClient.Start(login, password, 's'))
+                    if (ServerClient.Start(login, password, file, 's') && (extension == ".jpg" || extension == ".png"))
                     {
                         MessageBox.Show("Акаунт створено!");
                         logInSignUpGrid.Visibility = Visibility.Hidden;
+
+                        file = null;
+                        extension = null;
                     }
                     else
                     {
-                        MessageBox.Show("Таке ім'я вже існує!");
+                        MessageBox.Show("Таке ім'я вже існує,\nабо формат аватару не вірний!");
                     }
                 }
                 catch (Exception ex)
@@ -89,7 +106,7 @@ namespace WpfServerClient
             {
                 try
                 {
-                    if (ServerClient.Start(login, password, 'l'))
+                    if (ServerClient.Start(login, password, null, 'l'))
                     {
                         MessageBox.Show("Ви успішно увійшли!");
                         logInSignUpGrid.Visibility = Visibility.Hidden;
@@ -113,8 +130,8 @@ namespace WpfServerClient
 
         private void fileBtn_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog{ };
-
+            OpenFileDialog openFileDialog = new OpenFileDialog { };
+            
             if (openFileDialog.ShowDialog() == true)
             {
                 filePath = openFileDialog.FileName;
@@ -122,20 +139,6 @@ namespace WpfServerClient
                 extension = System.IO.Path.GetExtension(filePath);
                 file = System.IO.File.ReadAllBytes(filePath);
             }
-        }
-
-        public MainWindow()
-        {
-            InitializeComponent();
-
-            var bi = new BitmapImage();
-            bi.BeginInit();
-            bi.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
-            bi.CacheOption = BitmapCacheOption.OnLoad;
-            bi.UriSource = new Uri("background.jpg", UriKind.RelativeOrAbsolute);
-            bi.EndInit();
-
-            bgImage.Source = bi;
         }
     }
 }

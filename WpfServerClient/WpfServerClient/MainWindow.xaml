@@ -19,9 +19,16 @@
         </Grid.ColumnDefinitions>
 
         <Grid x:Name="logInSignUpGrid" Background="Aquamarine" Grid.ColumnSpan="3" Grid.RowSpan="3" Panel.ZIndex="1">
-            <Image x:Name="bgImage" Stretch="Fill"/>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            
+            <Image x:Name="bgImage" Stretch="Fill" Grid.RowSpan="2"/>
 
-            <Grid Width="440" Height="150">
+            <Button x:Name="setAvatarBtn" Content="Виберіть аватар" Click="fileBtn_Click" Width="180" FontSize="18" HorizontalAlignment="Left" Margin="2"/>
+
+            <Grid Width="440" Height="150" Grid.RowSpan="2">
                 <Grid.RowDefinitions>
                     <RowDefinition />
                     <RowDefinition />

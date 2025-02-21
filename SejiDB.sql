@@ -2,7 +2,7 @@ CREATE TABLE Users (
     Id INT IDENTITY(1,1) PRIMARY KEY,
     Login NVARCHAR(50) NOT NULL UNIQUE,
     Password NVARCHAR(50) NOT NULL,
-    Avatar VARBINARY(MAX),
+    Avatar VARBINARY(MAX) NOT NULL,
 	ColorBrush NVARCHAR(10) NOT NULL,
     ChatId INT NULL -- ID чата, если пользователь состоит в одном основном чате
 );
