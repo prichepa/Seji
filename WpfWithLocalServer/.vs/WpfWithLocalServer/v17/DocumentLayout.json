@@ -7,16 +7,16 @@
       "RelativeMoniker": "D:0:0:{362F0669-6D0A-461E-ACFF-F3B1A5A977DD}|WpfWithLocalServer\\WpfWithLocalServer.csproj|solutionrelative:wpfwithlocalserver\\server.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{362F0669-6D0A-461E-ACFF-F3B1A5A977DD}|WpfWithLocalServer\\WpfWithLocalServer.csproj|c:\\users\\gipopotamus\\desktop\\cherepok\\kpi\\messangerproject\\seji\\wpfwithlocalserver\\wpfwithlocalserver\\workwithdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{362F0669-6D0A-461E-ACFF-F3B1A5A977DD}|WpfWithLocalServer\\WpfWithLocalServer.csproj|solutionrelative:wpfwithlocalserver\\workwithdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{362F0669-6D0A-461E-ACFF-F3B1A5A977DD}|WpfWithLocalServer\\WpfWithLocalServer.csproj|c:\\users\\gipopotamus\\desktop\\cherepok\\kpi\\messangerproject\\seji\\wpfwithlocalserver\\wpfwithlocalserver\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{362F0669-6D0A-461E-ACFF-F3B1A5A977DD}|WpfWithLocalServer\\WpfWithLocalServer.csproj|solutionrelative:wpfwithlocalserver\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{362F0669-6D0A-461E-ACFF-F3B1A5A977DD}|WpfWithLocalServer\\WpfWithLocalServer.csproj|c:\\users\\gipopotamus\\desktop\\cherepok\\kpi\\messangerproject\\seji\\wpfwithlocalserver\\wpfwithlocalserver\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{362F0669-6D0A-461E-ACFF-F3B1A5A977DD}|WpfWithLocalServer\\WpfWithLocalServer.csproj|solutionrelative:wpfwithlocalserver\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{362F0669-6D0A-461E-ACFF-F3B1A5A977DD}|WpfWithLocalServer\\WpfWithLocalServer.csproj|c:\\users\\gipopotamus\\desktop\\cherepok\\kpi\\messangerproject\\seji\\wpfwithlocalserver\\wpfwithlocalserver\\workwithdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{362F0669-6D0A-461E-ACFF-F3B1A5A977DD}|WpfWithLocalServer\\WpfWithLocalServer.csproj|solutionrelative:wpfwithlocalserver\\workwithdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,7 +30,7 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "MainWindow.xaml.cs",
               "DocumentMoniker": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\Seji\\WpfWithLocalServer\\WpfWithLocalServer\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "WpfWithLocalServer\\MainWindow.xaml.cs",
@@ -38,18 +38,20 @@
               "RelativeToolTip": "WpfWithLocalServer\\MainWindow.xaml.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-14T09:15:13.067Z"
+              "WhenOpened": "2025-02-14T09:15:13.067Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\Seji\\WpfWithLocalServer\\WpfWithLocalServer\\MainWindow.xaml",
               "RelativeDocumentMoniker": "WpfWithLocalServer\\MainWindow.xaml",
               "ToolTip": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\Seji\\WpfWithLocalServer\\WpfWithLocalServer\\MainWindow.xaml",
               "RelativeToolTip": "WpfWithLocalServer\\MainWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-02-05T16:08:04.128Z"
+              "WhenOpened": "2025-02-05T16:08:04.128Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -59,22 +61,23 @@
               "RelativeDocumentMoniker": "WpfWithLocalServer\\Server.cs",
               "ToolTip": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\Seji\\WpfWithLocalServer\\WpfWithLocalServer\\Server.cs",
               "RelativeToolTip": "WpfWithLocalServer\\Server.cs",
-              "ViewState": "AgIAAIUAAAAAAAAAAAAwwJUAAABiAAAAAAAAAA==",
+              "ViewState": "AgIAAK0AAAAAAAAAAAAswMcAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-21T08:48:48.858Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "WorkWithDB.cs",
               "DocumentMoniker": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\Seji\\WpfWithLocalServer\\WpfWithLocalServer\\WorkWithDB.cs",
               "RelativeDocumentMoniker": "WpfWithLocalServer\\WorkWithDB.cs",
               "ToolTip": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\Seji\\WpfWithLocalServer\\WpfWithLocalServer\\WorkWithDB.cs",
               "RelativeToolTip": "WpfWithLocalServer\\WorkWithDB.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAgwBIAAABAAAAAAAAAAA==",
+              "ViewState": "AgIAABgAAAAAAAAAAAAgwCcAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-16T22:56:54.69Z"
+              "WhenOpened": "2025-02-16T22:56:54.69Z",
+              "EditorCaption": ""
             }
           ]
         }

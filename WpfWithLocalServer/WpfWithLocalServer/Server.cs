@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace WpfWithLocalServer
 {
@@ -64,45 +65,20 @@ namespace WpfWithLocalServer
             bool clientFilled = false;
             Client client = new Client();
 
-            byte[]? buffer = new byte[536870912];
-            int bytesCount;
-
             try
             {
-                while ((bytesCount = clientSocket.Receive(buffer)) > 0)
+                while (true)
                 {
                     if (!clientFilled)
                     {
-                        Array.Resize(ref buffer, bytesCount);
-                        string receivedUserInfo = Encoding.UTF8.GetString(buffer, 0, bytesCount);
+                        string login = Encoding.UTF8.GetString(ReceiveData(clientSocket));
+                        string password = Encoding.UTF8.GetString(ReceiveData(clientSocket));
+                        char entrType = Encoding.UTF8.GetString(ReceiveData(clientSocket))[0];
 
-                        char entrType = receivedUserInfo[receivedUserInfo.Length - 1];
-
-                        Array.Resize(ref buffer, bytesCount - 1);
-                        receivedUserInfo = receivedUserInfo[..^1];
-
-                        byte[] avatar = new byte[0];
                         if (entrType == 's')
                         {
-                            string avatarLength = receivedUserInfo.Substring(receivedUserInfo.LastIndexOf('.') + 1);
-                            avatar = new byte[Convert.ToInt32(avatarLength)];
+                            byte[] avatar = ReceiveData(clientSocket);
 
-                            Array.Resize(ref buffer, buffer.Length - avatarLength.Length - 1);
-
-                            for (int i = 0; i < avatar.Length; i++)
-                            {
-                                avatar[i] = buffer[buffer.Length - avatar.Length + i];
-                            }
-
-                            Array.Resize(ref buffer, buffer.Length - avatar.Length);
-                            receivedUserInfo = Encoding.UTF8.GetString(buffer);
-                        }
-                        int loginLength = Convert.ToInt32(receivedUserInfo.Substring(0, receivedUserInfo.IndexOf('.')));
-                        string login = receivedUserInfo.Substring(receivedUserInfo.IndexOf('.') + 1, receivedUserInfo.IndexOf('.') + loginLength - 1);
-                        string password = receivedUserInfo.Substring(receivedUserInfo.IndexOf('.') + 1 + loginLength);
-
-                        if(entrType == 's')
-                        {
                             Random random = new Random();
                             var color = new SolidColorBrush(Color.FromRgb(
                                 (byte)random.Next(0, 255),
@@ -129,6 +105,8 @@ namespace WpfWithLocalServer
                         {
                             if (WorkWithDB.ConnectUser(login, password))
                             {
+                                //chats(💀)
+
                                 clientSocket.Send(Encoding.UTF8.GetBytes(Convert.ToString(1)));
 
                                 client = FillClient(clientSocket, WorkWithDB.currentUser);
@@ -145,41 +123,23 @@ namespace WpfWithLocalServer
                     }
                     else
                     {
-                        Array.Resize(ref buffer, bytesCount);
+                        byte[] ex = ReceiveData(client.Socket);
+                        byte[] mes = ReceiveData(client.Socket);
+                        byte[] login = Encoding.UTF8.GetBytes(client.User.Login);
+                        byte[] avatar = client.User.Avatar;
+                        byte[] color = Encoding.UTF8.GetBytes(client.User.ColorBrush);
 
-                        string colorNLogin = client.User.ColorBrush.ToString() + client.User.Login;
-                        byte[] bColorNLogin = Encoding.UTF8.GetBytes(colorNLogin);
-                        byte[] avatarLength = Encoding.UTF8.GetBytes("." + Convert.ToString(client.User.Avatar.Length));
-
-                        Array.Resize(ref buffer, buffer.Length + bColorNLogin.Length + client.User.Avatar.Length + avatarLength.Length);
-                        
-                        for (int i = 0; i < bColorNLogin.Length; i++)
-                        {
-                            buffer[i + buffer.Length - bColorNLogin.Length - client.User.Avatar.Length - avatarLength.Length] = bColorNLogin[i];
-                        }
-                        for (int i = 0; i < client.User.Avatar.Length; i++)
-                        {
-                            buffer[i + buffer.Length - client.User.Avatar.Length - avatarLength.Length] = client.User.Avatar[i];
-                        }
-                        for (int i = 0; i < avatarLength.Length; i++)
-                        {
-                            buffer[i + buffer.Length - avatarLength.Length] = avatarLength[i];
-                        }
-
-                        Broadcast(buffer, client);
+                        SendData(ex, client.Socket);
+                        SendData(mes, client.Socket);
+                        SendData(login, client.Socket);
+                        SendData(avatar, client.Socket);
+                        SendData(color, client.Socket);
                     }
-
-                    buffer = null;
-                    GC.Collect();
-                    GC.WaitForPendingFinalizers();
-                    buffer = new byte[536870912];
                 }
             }
             catch(Exception ex)
             {
                 Window?.Dispatcher.Invoke(() => Window.lvChat.Items.Add(ex.Message));
-                clientSocket?.Close();
-                clients.Remove(client);
             }
             finally
             {
@@ -188,6 +148,24 @@ namespace WpfWithLocalServer
 
                 Window?.Dispatcher.Invoke(() => Window.labelClients.Content = $"Clients: {clients.Count}");
             }
+        }
+        private static byte[] ReceiveData(Socket client)
+        {
+            byte[] lengthBuffer = new byte[4];
+            int bytesRead = client.Receive(lengthBuffer);
+            if (bytesRead < 4) return null;
+
+            int dataLength = BitConverter.ToInt32(lengthBuffer);
+            byte[] buffer = new byte[dataLength];
+
+            int totalBytesRead = 0;
+            while (totalBytesRead < dataLength)
+            {
+                bytesRead = client.Receive(buffer, totalBytesRead, dataLength - totalBytesRead, SocketFlags.None);
+                totalBytesRead += bytesRead;
+            }
+
+            return buffer;
         }
 
         /*
@@ -204,13 +182,18 @@ namespace WpfWithLocalServer
             });
         }*/
 
-        static void Broadcast(byte[] message, Client currentclient)
+        private static void SendData(byte[] data, Socket? clientSocket)
         {
-            foreach (Client client in clients)
+            byte[]? length = BitConverter.GetBytes(data.Length);
+            if (length != null)
             {
-                if (client != currentclient)
+                foreach(var client in clients)
                 {
-                    client.Socket?.Send(message);
+                    if(client.Socket != clientSocket)
+                    {
+                        client.Socket.Send(length);
+                        client.Socket.Send(data);
+                    }
                 }
             }
         }

@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.IO;
 using System.Windows.Media.Imaging;
+using System.Diagnostics;
 
 namespace WpfServerClient
 {
@@ -28,26 +29,14 @@ namespace WpfServerClient
             {
                 client.Connect(new IPEndPoint(IPAddress.Parse("26.10.226.173"), 80));
 
-                byte[] bUserInfo = Encoding.UTF8.GetBytes(login.Length + "." + login + password);
-                
+                SendData(Encoding.UTF8.GetBytes(login));
+                SendData(Encoding.UTF8.GetBytes(password));
+                SendData(Encoding.UTF8.GetBytes(Convert.ToString(entrType)));
+
                 if (entrType == 's')
                 {
-                    byte[] bAvatarLength = Encoding.UTF8.GetBytes("." + Convert.ToString(avatar.Length));
-                    Array.Resize(ref bUserInfo, bUserInfo.Length + avatar.Length + bAvatarLength.Length);
-
-                    for (int i = 0; i < avatar.Length; i++)
-                    {
-                        bUserInfo[i + bUserInfo.Length - avatar.Length - bAvatarLength.Length] = avatar[i];
-                    }
-                    for (int i = 0; i < bAvatarLength.Length; i++)
-                    {
-                        bUserInfo[i + bUserInfo.Length - bAvatarLength.Length] = bAvatarLength[i];
-                    }
+                    SendData(avatar);
                 }
-                Array.Resize(ref bUserInfo, bUserInfo.Length + 1);
-                bUserInfo[bUserInfo.Length - 1] = Convert.ToByte(entrType);
-
-                client.Send(bUserInfo);
 
                 byte[] buffer = new byte[1];
                 client.Receive(buffer);
@@ -86,9 +75,6 @@ namespace WpfServerClient
                         Content = strMessage,
                         HorizontalContentAlignment = HorizontalAlignment.Right
                     };
-
-                    Window?.lvChat?.Items.Add(item);
-                    Window?.lvChat?.ScrollIntoView(item);
                 }
                 else if (extension == ".png" || extension == ".jpg")
                 {
@@ -98,9 +84,12 @@ namespace WpfServerClient
                     img.MaxHeight = 350;
                     img.MaxWidth = 350;
                     item.Content = img;
+                    item.SizeChanged += (sender, args) =>
+                    {
+                        Window?.lvChat?.ScrollIntoView(item);
+                    };
 
-                    Window?.lvChat?.Items.Add(item);
-                    Window?.lvChat?.ScrollIntoView(item);
+                    ShowFolder(item, filePath);
                 }
                 else if (extension == ".mp4" || extension == ".gif" || extension == ".mp3")
                 {
@@ -130,40 +119,44 @@ namespace WpfServerClient
                     else
                     {
                         item = new ListViewItem { Content = media, HorizontalContentAlignment = HorizontalAlignment.Right };
+                        item.SizeChanged += (sender, args) =>
+                        {
+                            Window?.lvChat?.ScrollIntoView(item);
+                        };
                     }
 
                     WorkWithVideo(item, media, extension, panel);
 
-                    Window.lvChat.Items.Add(item);
-                    Window?.lvChat?.ScrollIntoView(item);
+                    ShowFolder(item, filePath);
                 }
                 else
                 {
                     item = new ListViewItem()
                     {
                         Content = "*File sended*",
-                        HorizontalContentAlignment = HorizontalAlignment.Right,
+                        HorizontalContentAlignment = HorizontalAlignment.Right
                     };
 
-                    Window?.lvChat?.Items.Add(item);
-                    Window?.lvChat?.ScrollIntoView(item);
+                    ShowFolder(item, filePath);
                 }
+
+                Window?.lvChat?.Items.Add(item);
+                Window?.lvChat?.ScrollIntoView(item);
 
                 byte[] bExtension = Encoding.UTF8.GetBytes(extension);
-
-                Array.Resize(ref message, message.Length + bExtension.Length);
-
-                for (int i = 0; i < bExtension.Length; i++)
-                {
-                    message[i + message.Length - bExtension.Length] = bExtension[i];
-                }
-                
-                client.Send(message);
+                SendData(bExtension);
+                SendData(message);
             }
             catch (SocketException ex)
             {
-                Window?.lvChat?.Items.Add(ex.Message);//ex when typing and no server
+                Window?.lvChat?.Items.Add(ex.Message);
             }
+        }
+        private static void SendData(byte[] data)
+        {
+            byte[] length = BitConverter.GetBytes(data.Length);
+            client.Send(length);
+            client.Send(data);
         }
 
         private static void RecieveMessages()
@@ -175,42 +168,29 @@ namespace WpfServerClient
                 Directory.CreateDirectory(folderPath);
             }
 
-            byte[]? buffer = new byte[536870912];
-            int bytesCount = 0;
-
             try
             {
-                while ((bytesCount = client.Receive(buffer)) > 0)
+                while (true)
                 {
-                    Array.Resize(ref buffer, bytesCount);
-                    string result = Encoding.UTF8.GetString(buffer);
+                    byte[]? bExtension = ReceiveData();
+                    string? extension = Encoding.UTF8.GetString(bExtension);
 
-                    string avatarLength = result.Substring(result.LastIndexOf('.') + 1);
-                    byte[] avatar = new byte[Convert.ToInt32(avatarLength)];
+                    byte[]? buffer = ReceiveData();
+                    if (buffer == null) break;
 
-                    Array.Resize(ref buffer, buffer.Length - avatarLength.Length - 1);
-                    for (int i = 0; i < avatar.Length; i++)
-                    {
-                        avatar[i] = buffer[buffer.Length - avatar.Length + i];
-                    }
+                    byte[]? bLogin = ReceiveData();
+                    string? login = Encoding.UTF8.GetString(bLogin);
 
-                    Array.Resize(ref buffer, buffer.Length - avatar.Length);
-                    result = Encoding.UTF8.GetString(buffer);
+                    byte[]? avatar = ReceiveData();
 
-                    string login = result.Substring(result.LastIndexOf('#') + 9);
-                    result = result[..^(login.Length)];
-
-                    string color = result.Substring(result.LastIndexOf('#') + 1);
-
-                    string extension = result.Substring(result.LastIndexOf('.'), result.LastIndexOf('#') - result.LastIndexOf('.'));
-
+                    byte[]? bColor = ReceiveData();
+                    string? color = Encoding.UTF8.GetString(bColor)[1..];
                     byte alpha = byte.Parse(color.Substring(0, 2), System.Globalization.NumberStyles.HexNumber);
                     byte red = byte.Parse(color.Substring(2, 2), System.Globalization.NumberStyles.HexNumber);
                     byte green = byte.Parse(color.Substring(4, 2), System.Globalization.NumberStyles.HexNumber);
                     byte blue = byte.Parse(color.Substring(6, 2), System.Globalization.NumberStyles.HexNumber);
 
-                    Array.Resize(ref buffer, buffer.Length - Encoding.UTF8.GetBytes(login).Length - Encoding.UTF8.GetBytes(color).Length - 1 - Encoding.UTF8.GetBytes(extension).Length);
-
+                    ListViewItem item;
                     Window?.Dispatcher.Invoke(() =>
                     {
                         string[] files = Directory.GetFiles(folderPath);
@@ -228,23 +208,23 @@ namespace WpfServerClient
                         panel.Children.Add(img);
                         panel.Children.Add(textBlock);
 
-                        ListViewItem item = new ListViewItem();
+                        item = new ListViewItem();
                         item.Content = panel;
 
                         Window?.lvChat?.Items.Add(item);
                     });
 
-                    string message = "";
+                    string message;
                     if (extension == ".message")
                     {
-                        message += Encoding.UTF8.GetString(buffer);
+                        message = Encoding.UTF8.GetString(buffer);
 
                         Window?.Dispatcher.Invoke(() =>
                         {
-                            ListViewItem item = new ListViewItem()
+                            item = new ListViewItem()
                             {
-                                    Content = message,
-                                    Foreground = new SolidColorBrush(System.Windows.Media.Color.FromArgb(alpha, red, green, blue))
+                                Content = message,
+                                Foreground = new SolidColorBrush(Color.FromArgb(alpha, red, green, blue))
                             };
 
                             Window?.lvChat?.Items.Add(item);
@@ -261,15 +241,20 @@ namespace WpfServerClient
                         {
                             Window?.Dispatcher.Invoke(() =>
                             {
-                                ListViewItem item = new ListViewItem();
+                                item = new ListViewItem();
                                 Image img = new Image();
                                 img.Source = new BitmapImage(new Uri(filePath, UriKind.Absolute));
                                 img.MaxHeight = 350;
                                 img.MaxWidth = 350;
                                 item.Content = img;
+                                item.SizeChanged += (sender, args) =>
+                                {
+                                    Window?.lvChat?.ScrollIntoView(item);
+                                };
 
                                 Window?.lvChat?.Items.Add(item);
                                 Window?.lvChat?.ScrollIntoView(item);
+                                ShowFolder(item, filePath);
                             });
                         }
                         else if (extension == ".mp4" || extension == ".gif" || extension == ".mp3")
@@ -285,7 +270,6 @@ namespace WpfServerClient
                                 };
                                 media.Pause();
 
-                                ListViewItem item;
                                 StackPanel? panel = null;
                                 if (extension == ".mp3")
                                 {
@@ -303,42 +287,67 @@ namespace WpfServerClient
                                 else
                                 {
                                     item = new ListViewItem { Content = media };
+                                    item.SizeChanged += (sender, args) =>
+                                    {
+                                        Window?.lvChat?.ScrollIntoView(item);
+                                    };
                                 }
-                                
+
                                 WorkWithVideo(item, media, extension, panel);
 
-                                Window.lvChat.Items.Add(item);
+                                Window?.lvChat?.Items.Add(item);
                                 Window?.lvChat?.ScrollIntoView(item);
+                                ShowFolder(item, filePath);
                             });
                         }
                         else
                         {
                             Window?.Dispatcher.Invoke(() =>
                             {
-                                ListViewItem item = new ListViewItem()
+                                item = new ListViewItem()
                                 {
                                     Content = "*File recieved*"
                                 };
 
                                 Window?.lvChat?.Items.Add(item);
                                 Window?.lvChat?.ScrollIntoView(item);
+                                ShowFolder(item, filePath);
                             });
                         }
                     }
-
-                    buffer = null;
-                    GC.Collect();
-                    GC.WaitForPendingFinalizers();
-                    buffer = new byte[536870912];
                 }
             }
             catch (SocketException ex)
             {
-                Window?.Dispatcher.Invoke(() =>
-                {
-                    Window?.lvChat?.Items.Add(ex.Message);//ex when disconnected
-                });
+                Window?.Dispatcher.Invoke(() => Window?.lvChat?.Items.Add(ex.Message));
             }
+        }
+
+        private static byte[] ReceiveData()
+        {
+            byte[] lengthBuffer = new byte[4];
+            int bytesRead = client.Receive(lengthBuffer);
+            if (bytesRead < 4) return null;
+
+            int dataLength = BitConverter.ToInt32(lengthBuffer);
+            byte[] buffer = new byte[dataLength];
+
+            int totalBytesRead = 0;
+            while (totalBytesRead < dataLength)
+            {
+                bytesRead = client.Receive(buffer, totalBytesRead, dataLength - totalBytesRead, SocketFlags.None);
+                totalBytesRead += bytesRead;
+            }
+
+            return buffer;
+        }
+
+        private static void ShowFolder(ListViewItem item, string filePath)
+        {
+            item.PreviewMouseRightButtonDown += (s, e) =>
+            {
+                Process.Start("explorer.exe", $"/select,\"{filePath}\"");
+            };
         }
 
         private static void WorkWithVideo(ListViewItem item, MediaElement media, string extension, StackPanel? panel)

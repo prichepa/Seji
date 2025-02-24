@@ -4,14 +4,12 @@ CREATE TABLE Users (
     Password NVARCHAR(50) NOT NULL,
     Avatar VARBINARY(MAX) NOT NULL,
 	ColorBrush NVARCHAR(10) NOT NULL,
-    ChatId INT NULL -- ID чата, если пользователь состоит в одном основном чате
 );
 
 CREATE TABLE Chats (
     Id INT IDENTITY(1,1) PRIMARY KEY,
     Name NVARCHAR(100) NULL, -- NULL для личных чатов
-    IsGroup BIT NOT NULL DEFAULT 0,
-    CreatedAt DATETIME DEFAULT GETDATE()
+    IsGroup BIT NOT NULL DEFAULT 0
 );
 
 CREATE TABLE ChatUsers (
@@ -26,8 +24,8 @@ CREATE TABLE Messages (
     Id INT IDENTITY(1,1) PRIMARY KEY,
     ChatId INT NOT NULL,
     UserId INT NOT NULL,
-    Content VARBINARY(MAX) NOT NULL,
-    Timestamp DATETIME DEFAULT GETDATE(),
+    MessageContent VARBINARY(MAX) NOT NULL,
+    SentTime DATETIME DEFAULT GETDATE() NOT NULL,
     FOREIGN KEY (ChatId) REFERENCES Chats(Id) ON DELETE CASCADE,
     FOREIGN KEY (UserId) REFERENCES Users(Id) ON DELETE CASCADE
 );
