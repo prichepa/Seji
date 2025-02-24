@@ -168,20 +168,6 @@ namespace WpfWithLocalServer
             return buffer;
         }
 
-        /*
-        public static void PrintMessage(string? message, Color color, string login)
-        {
-            Window?.Dispatcher.Invoke(() => {
-                ListViewItem item = new ListViewItem() {
-                    Content = $"{login}: " + message,
-                    Foreground = new SolidColorBrush(color)
-                };
-
-                Window?.lvChat?.Items.Add(item);
-                Window?.lvChat?.ScrollIntoView(item);
-            });
-        }*/
-
         private static void SendData(byte[] data, Socket? clientSocket)
         {
             byte[]? length = BitConverter.GetBytes(data.Length);
