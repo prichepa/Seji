@@ -105,6 +105,8 @@ namespace WpfWithLocalServer
                         {
                             if (WorkWithDB.ConnectUser(login, password))
                             {
+                                //int chatId;
+                                //WorkWithDB.GetChatMessage(chatId, i);
                                 //chats(💀)
 
                                 clientSocket.Send(Encoding.UTF8.GetBytes(Convert.ToString(1)));
@@ -123,14 +125,17 @@ namespace WpfWithLocalServer
                     }
                     else
                     {
-                        byte[] ex = ReceiveData(client.Socket);
-                        byte[] mes = ReceiveData(client.Socket);
+                        string secondUser = Encoding.UTF8.GetString(ReceiveData(client.Socket));
+                        byte[] extension = ReceiveData(client.Socket);
+                        byte[] message = ReceiveData(client.Socket);
                         byte[] login = Encoding.UTF8.GetBytes(client.User.Login);
                         byte[] avatar = client.User.Avatar;
                         byte[] color = Encoding.UTF8.GetBytes(client.User.ColorBrush);
 
-                        SendData(ex, client.Socket);
-                        SendData(mes, client.Socket);
+                        WorkWithDB.AddMessage(extension, message, client.User.Id, secondUser);
+
+                        SendData(extension, client.Socket);
+                        SendData(message, client.Socket);
                         SendData(login, client.Socket);
                         SendData(avatar, client.Socket);
                         SendData(color, client.Socket);

@@ -22,6 +22,7 @@
         public int ChatId { get; set; }
         public int UserId { get; set; }
         public byte[] MessageContent { get; set; }
+        public byte[] Extension { get; set; }
         public DateTime SentTime { get; set; }
     }
 

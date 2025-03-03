@@ -60,6 +60,8 @@ namespace WpfServerClient
 
         public static void SendMessage(byte[] message, string? extension, string? filePath)
         {
+            extension = extension.ToLower();
+
             try
             {
                 ListViewItem item;
@@ -131,12 +133,34 @@ namespace WpfServerClient
                 }
                 else
                 {
-                    item = new ListViewItem()
+                    StackPanel panel = new StackPanel() { Orientation = Orientation.Horizontal };
+                    var bi = new BitmapImage();
+                    bi.BeginInit();
+                    bi.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                    bi.CacheOption = BitmapCacheOption.OnLoad;
+                    bi.UriSource = new Uri("fileicon.png", UriKind.RelativeOrAbsolute);
+                    bi.EndInit();
+                    Image img = new Image()
                     {
-                        Content = "*File sended*",
-                        HorizontalContentAlignment = HorizontalAlignment.Right
+                        Source = bi,
+                        Height = 25,
+                        Width = 25,
                     };
 
+                    panel.Children.Add(img);
+                    TextBlock text = new TextBlock()
+                    {
+                        Text = " " + Path.GetFileName(filePath),
+                        VerticalAlignment = VerticalAlignment.Center
+                    };
+                    panel.Children.Add(text);
+                    item = new ListViewItem()
+                    {
+                        Content = panel,
+                        HorizontalAlignment = HorizontalAlignment.Right
+                    };
+
+                    OpenFile(item, filePath);
                     ShowFolder(item, filePath);
                 }
 
@@ -144,6 +168,8 @@ namespace WpfServerClient
                 Window?.lvChat?.ScrollIntoView(item);
 
                 byte[] bExtension = Encoding.UTF8.GetBytes(extension);
+                byte[] bSecondUserName = Encoding.UTF8.GetBytes("aboba");
+                SendData(bSecondUserName);
                 SendData(bExtension);
                 SendData(message);
             }
@@ -304,10 +330,33 @@ namespace WpfServerClient
                         {
                             Window?.Dispatcher.Invoke(() =>
                             {
+                                StackPanel panel = new StackPanel() { Orientation = Orientation.Horizontal };
+                                var bi = new BitmapImage();
+                                bi.BeginInit();
+                                bi.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                                bi.CacheOption = BitmapCacheOption.OnLoad;
+                                bi.UriSource = new Uri("fileicon.png", UriKind.RelativeOrAbsolute);
+                                bi.EndInit();
+                                Image img = new Image()
+                                {
+                                    Source = bi,
+                                    Height = 25,
+                                    Width = 25,
+                                };
+
+                                panel.Children.Add(img);
+                                TextBlock text = new TextBlock()
+                                {
+                                    Text = " " + Path.GetFileName(filePath),
+                                    VerticalAlignment = VerticalAlignment.Center
+                                };
+                                panel.Children.Add(text);
                                 item = new ListViewItem()
                                 {
-                                    Content = "*File recieved*"
+                                    Content = panel
                                 };
+
+                                OpenFile(item, filePath);
 
                                 Window?.lvChat?.Items.Add(item);
                                 Window?.lvChat?.ScrollIntoView(item);
@@ -347,6 +396,15 @@ namespace WpfServerClient
             item.PreviewMouseRightButtonDown += (s, e) =>
             {
                 Process.Start("explorer.exe", $"/select,\"{filePath}\"");
+            };
+        }
+
+        private static void OpenFile(ListViewItem item, string filePath)
+        {
+            item.PreviewMouseLeftButtonDown += (s, e) =>
+            {
+                string file = Path.GetFileName(filePath);
+                Process.Start(new ProcessStartInfo(filePath) { UseShellExecute = true });
             };
         }
 

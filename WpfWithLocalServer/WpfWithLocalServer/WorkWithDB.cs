@@ -57,5 +57,33 @@ namespace WpfWithLocalServer
                 return false;
             }
         }
+
+        public static void AddMessage(byte[] extension, byte[] message, int userId, string secondUserName)
+        {
+            //var chatUser = db.ChatUsers.FirstOrDefault(cu => cu.UserId == currentUser.Id);
+            //int chatId = Convert.ToInt32(db.Chats.FirstOrDefault(c => c.Id == chatUser.ChatId));
+
+            //create
+
+            Message newMessage = new Message() {
+                Extension = extension,
+                MessageContent = message,
+                UserId = userId,
+                ChatId = 1,
+                SentTime = DateTime.Now
+            };
+
+            db.Messages.Add(newMessage);
+            db.SaveChanges();
+        }
+
+        /*public static (byte[], DateTime) GetChatMessage(int chatId, int skipIndex)
+        {
+            var chatUser = db.ChatUsers.FirstOrDefault(c => c.UserId == currentUser.Id);
+            var chat = db.Chats.FirstOrDefault(c => c.Id == chatUser.ChatId);
+            var message = db.Messages.FirstOrDefault(m => m.ChatId == chatId);
+
+            return (message.MessageContent, message.SentTime);
+        }*/
     }
 }
