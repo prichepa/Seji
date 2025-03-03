@@ -24,6 +24,7 @@ namespace WpfServerClient
                 SocketType.Stream,
                 ProtocolType.Tcp
                 );
+            Stickers();
 
             try
             {
@@ -43,7 +44,7 @@ namespace WpfServerClient
 
                 if (Convert.ToBoolean(Convert.ToInt32(Encoding.UTF8.GetString(buffer))))
                 {
-                    Task.Run(RecieveMessages);
+                        Task.Run(RecieveMessages);
                     return true;
                 }
                 else
@@ -57,6 +58,7 @@ namespace WpfServerClient
                 return false;
             }
         }
+        
 
         public static void SendMessage(byte[] message, string? extension, string? filePath)
         {
@@ -183,6 +185,61 @@ namespace WpfServerClient
             byte[] length = BitConverter.GetBytes(data.Length);
             client.Send(length);
             client.Send(data);
+        }
+        public static void Stickers()
+        {
+            string folderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Stickers");
+
+            if (!Directory.Exists(folderPath))
+            {
+                Directory.CreateDirectory(folderPath);
+            }
+
+            string[] files = Directory.GetFiles(folderPath);
+            for(int i = 0; i < files.Length; i++)
+            {
+                string filePath = Path.Combine(folderPath, $"Sticker{i}.png");
+                Window?.Dispatcher.Invoke(() =>
+                {
+                    Image img = new Image()
+                    {
+                        MaxHeight = 100,
+                        MaxWidth = 100,
+                        Source = new BitmapImage(new Uri(filePath, UriKind.Absolute))
+                    };
+                    ListViewItem item = new ListViewItem()
+                    {
+                        Content = img
+                    };
+                    Window?.Stickers.Items.Add(item);
+                    SendStikers(item, filePath);
+                });
+            }
+        }
+        public static void SendStikers(ListViewItem item, string filePath)
+        {
+            item.PreviewMouseLeftButtonDown += (s, e) =>
+            {
+                byte[] file = System.IO.File.ReadAllBytes(filePath);
+                byte[] bSecondUserName = Encoding.UTF8.GetBytes("aboba");
+                byte[] bExtension = Encoding.UTF8.GetBytes(".png");
+                Window?.Dispatcher.Invoke(() =>
+                {
+                    Image img = new Image()
+                    {
+                        Source = new BitmapImage(new Uri(filePath, UriKind.Absolute))
+                    };
+                    ListViewItem item = new ListViewItem()
+                    {
+                        Content = img,
+                        HorizontalContentAlignment = HorizontalAlignment.Right
+                    };
+                    Window?.lvChat.Items.Add(item);
+                });
+                SendData(bSecondUserName);
+                SendData(bExtension);
+                SendData(file);
+            };
         }
 
         private static void RecieveMessages()
