@@ -3,12 +3,13 @@ CREATE TABLE Users (
     Login NVARCHAR(50) NOT NULL UNIQUE,
     Password NVARCHAR(50) NOT NULL,
     Avatar VARBINARY(MAX) NOT NULL,
+	avatarExtension NVARCHAR(50) NOT NULL,
 	ColorBrush NVARCHAR(10) NOT NULL,
 );
 
 CREATE TABLE Chats (
     Id INT IDENTITY(1,1) PRIMARY KEY,
-    Name NVARCHAR(100) NULL, -- NULL для личных чатов
+    Name NVARCHAR(100) NULL,
     IsGroup BIT NOT NULL DEFAULT 0
 );
 

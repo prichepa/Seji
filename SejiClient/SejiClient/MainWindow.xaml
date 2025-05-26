@@ -1,0 +1,62 @@
+﻿<Window x:Class="SejiClient.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SejiClient"
+        mc:Ignorable="d"
+        Title="Seji" Height="450" Width="1000">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.12*"/>
+            <RowDefinition />
+            <RowDefinition Height="0.15*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.3*"/>
+            <ColumnDefinition Width="36"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Grid x:Name="logInSignUpGrid"  Grid.ColumnSpan="3" Grid.RowSpan="3" Panel.ZIndex="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Image x:Name="bgImage" Stretch="Fill" Grid.RowSpan="2"/>
+
+            <Button x:Name="setAvatarBtn" Content="Виберіть аватар" Click="fileBtn_Click" Width="180" FontSize="18" HorizontalAlignment="Left" Margin="2"/>
+
+            <Grid Width="440" Height="150" Grid.RowSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="logInBtn" Click="logInBtn_Click" Grid.Column="0" Grid.Row="1" Margin="30 20 10 20" Content="Увійти" FontSize="18"/>
+                <TextBox x:Name="loginTBox" Grid.Column="0" Grid.Row="0" Margin="10 20 10 20" FontSize="18" VerticalAlignment="Center" Padding="0 2 0 2" KeyDown="Login_KeyDown"/>
+                <TextBlock x:Name="loginTBlock" Grid.Row="0" Grid.Column="0" Text=" Логін" IsHitTestVisible="False" Foreground="DarkGray" Margin="10 0 10 0" FontSize="18" VerticalAlignment="Center"/>
+
+                <Button x:Name="signUpBtn" Click="signUpBtn_Click" Grid.Column="1" Grid.Row="1" Margin="10 20 30 20" Content="Зареєструватися" FontSize="18"/>
+                <TextBox x:Name="passwordTBox" Grid.Column="1" Grid.Row="0" Margin="10 20 10 20" FontSize="18" VerticalAlignment="Center" Padding="0 2 0 2" KeyDown="Password_KeyDown"/>
+                <TextBlock x:Name="passwordTBlock" Grid.Row="0" Grid.Column="1" Text=" Пароль" IsHitTestVisible="False" Foreground="DarkGray" Margin="10 0 10 0" FontSize="18" VerticalAlignment="Center"/>
+            </Grid>
+        </Grid>
+
+        <Label x:Name="labelChatName" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Seji" FontSize="22" FontWeight="Bold" Foreground="DarkGray"/>
+
+        <ListView x:Name="lvChats" SelectionChanged="LvChats_SelectionChanged" Grid.Row="1" Grid.RowSpan="2" Background="LightGray" Margin="10" FontSize="18"/>
+        <TextBox x:Name="tbChat"  Margin="10 5 10 5" FontSize="18" VerticalAlignment="Center" Padding="0 2 0 2" KeyDown="NewChat_KeyDown"/>
+        <TextBlock x:Name="tBlockTextChat" Text=" Ім'я користувача..." IsHitTestVisible="False" Foreground="DarkGray" Margin="10 5 10 5" FontSize="18" VerticalAlignment="Center" Padding="0 2 0 2"/>
+
+        <ListView x:Name="lvChat" ItemContainerStyle="{StaticResource NoSelectionListViewItemStyle}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Background="LightGoldenrodYellow" Margin="10" FontSize="18" VirtualizingPanel.ScrollUnit="Pixel" VirtualizingPanel.IsVirtualizing="True"/>
+        <Button x:Name="fileBtn" Content="P" Grid.Row="2" Grid.Column="1" Click="fileBtn_Click" Margin="10 0 0 1" Width="26" Height="26"/>
+        <TextBox x:Name="tbMessage" Grid.Row="2" Grid.Column="2" Margin="10 0 10 2" FontSize="18" VerticalAlignment="Center" Padding="0 2 0 2" KeyDown="Message_KeyDown"/>
+        <TextBlock x:Name="tBlockText" Grid.Row="2" Grid.Column="2" Text=" Введіть повідомлення..." IsHitTestVisible="False" Foreground="DarkGray" Margin="10 0 10 2" FontSize="18" VerticalAlignment="Center" Padding="0 2 0 2"/>
+    </Grid>
+</Window>
