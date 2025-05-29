@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "XTwEdy+k6I4=",
+  "dgSpecHash": "rU2+7qc/liI=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Gipopotamus\\Desktop\\SejiServer\\SejiServer\\SejiServer.csproj",
+  "projectFilePath": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\Seji\\SejiServer\\SejiServer\\SejiServer.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Gipopotamus\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\Gipopotamus\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

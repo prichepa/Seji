@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Gipopotamus\\Desktop\\SejiServer\\SejiServer\\SejiServer.csproj": {}
+    "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\Seji\\SejiServer\\SejiServer\\SejiServer.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Gipopotamus\\Desktop\\SejiServer\\SejiServer\\SejiServer.csproj": {
+    "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\Seji\\SejiServer\\SejiServer\\SejiServer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Gipopotamus\\Desktop\\SejiServer\\SejiServer\\SejiServer.csproj",
+        "projectUniqueName": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\Seji\\SejiServer\\SejiServer\\SejiServer.csproj",
         "projectName": "SejiServer",
-        "projectPath": "C:\\Users\\Gipopotamus\\Desktop\\SejiServer\\SejiServer\\SejiServer.csproj",
+        "projectPath": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\Seji\\SejiServer\\SejiServer\\SejiServer.csproj",
         "packagesPath": "C:\\Users\\Gipopotamus\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Gipopotamus\\Desktop\\SejiServer\\SejiServer\\obj\\",
+        "outputPath": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\Seji\\SejiServer\\SejiServer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

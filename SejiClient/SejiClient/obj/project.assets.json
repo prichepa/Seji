@@ -61,11 +61,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Gipopotamus\\Desktop\\SejiClient\\SejiClient\\SejiClient.csproj",
+      "projectUniqueName": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\Seji\\SejiClient\\SejiClient\\SejiClient.csproj",
       "projectName": "SejiClient",
-      "projectPath": "C:\\Users\\Gipopotamus\\Desktop\\SejiClient\\SejiClient\\SejiClient.csproj",
+      "projectPath": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\Seji\\SejiClient\\SejiClient\\SejiClient.csproj",
       "packagesPath": "C:\\Users\\Gipopotamus\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Gipopotamus\\Desktop\\SejiClient\\SejiClient\\obj\\",
+      "outputPath": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\Seji\\SejiClient\\SejiClient\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

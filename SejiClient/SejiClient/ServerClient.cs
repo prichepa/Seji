@@ -1,23 +1,21 @@
-﻿using System;
-using System.Drawing;
+﻿using Newtonsoft.Json;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Security.Policy;
 using System.Text;
-using System.Text.Json.Nodes;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using Newtonsoft.Json;
+using System.Windows.Media.Imaging;
 
 namespace SejiClient
 {
     public static class ServerClient
     {
-        static readonly string url = "http://26.10.226.173:80/";
+        static readonly string url = "http://26.10.226.173:8080/";
         static readonly HttpClient client = new HttpClient { BaseAddress = new Uri(url) };
         static readonly HttpListener listener = new HttpListener();
         public static MainWindow? Window { get; set; }
@@ -32,16 +30,17 @@ namespace SejiClient
             try
             {
                 HttpResponseMessage response;
+
+                string? json;
                 if (entrType == 's')
                 {
-                    response = await SendMultipartRequest("signUp", avatarPath, $"{{\"login\":\"{login}\",\"password\":\"{password}\",\"extension\":\"{Path.GetExtension(avatarPath)}\"}}");
+                    (json, var fileData) = await SendMultipartRequest("signUp", avatarPath, $"{{\"login\":\"{login}\",\"password\":\"{password}\",\"extension\":\"{Path.GetExtension(avatarPath)}\"}}");
                 }
                 else
                 {
-                    response = await SendMultipartRequest("login", "", $"{{\"login\":\"{login}\",\"password\":\"{password}\"}}");
+                    (json, var fileData) = await SendMultipartRequest("login", "", $"{{\"login\":\"{login}\",\"password\":\"{password}\"}}");
                 }
 
-                var json = await response.Content.ReadAsStringAsync();
                 var result = JsonConvert.DeserializeObject<dynamic>(json);
 
                 if (result.loginResult == "true")
@@ -57,7 +56,7 @@ namespace SejiClient
                         }
                     }
 
-                    //Task.Run(ReciveMessages);
+                    _ = StartReceivingMessages();
 
                     return true;
                 }
@@ -70,93 +69,126 @@ namespace SejiClient
             }
         }
 
-        /*static async void ReciveMessages()
+        public static async Task GetChat(string secondUser)
         {
-            while (true)
+            try
             {
-                var context = await listener.GetContextAsync();
-                _ = Task.Run(() => WorkWithRequest(context));
+                Window.lvChats.IsEnabled = false;
+
+                var (json, fileData) = await SendMultipartRequest("chat", "", $"{{\"login\":\"{currentLogin}\",\"secondUserLogin\":\"{secondUser}\"}}");
+
+                var result = JsonConvert.DeserializeObject<dynamic>(json);
+
+                Window?.lvChat?.Items.Clear();
+
+                if ((int)result.messagesNumber == -1)
+                {
+                    Window?.lvChats?.Items.Remove(secondUser);
+                    Window.labelChatName.Content = "Seji";
+                    MessageBox.Show("Такого користувача не існує!");
+                    secondUserLogin = null;
+                    Window.lvChats.IsEnabled = true;
+                    return;
+                }
+
+                string avatarsFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Avatars");
+                if (!Directory.Exists(avatarsFolderPath))
+                {
+                    Directory.CreateDirectory(avatarsFolderPath);
+                }
+                else
+                {
+                    var avatarFiles = Directory.GetFiles(avatarsFolderPath, $"{secondUser}.*");
+
+                    if (avatarFiles.Length > 0)
+                    {
+                        secondUserAvatarPath = avatarFiles[0];
+                    }
+                    else
+                    {
+                        (json, fileData) = await SendMultipartRequest("avatar", "", $"{{\"secondUserLogin\":\"{secondUser}\"}}");
+                        dynamic avatarInfo = JsonConvert.DeserializeObject<dynamic>(json);
+
+                        File.WriteAllBytes(avatarsFolderPath + "\\" + secondUser + (string)avatarInfo.extension, fileData);
+
+                        secondUserAvatarPath = avatarsFolderPath + "\\" + secondUser + (string)avatarInfo.extension;
+                    }
+                }
+
+                secondUserLogin = secondUser;
+
+                for(int i = 0; i < (int)result.messagesNumber; i++)
+                {
+                    (json, fileData) = await SendMultipartRequest("getMessage", "", $"{{\"index\":\"{i}\",\"login\":\"{currentLogin}\",\"secondUserName\":\"{secondUser}\"}}");
+                    dynamic messageInfo = JsonConvert.DeserializeObject<dynamic>(json);
+
+                    WorkWithMessage((string)messageInfo.login, (string)messageInfo.extension, ((string)messageInfo.color)[1..], fileData);
+                }
+
+                Window.lvChats.IsEnabled = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
-        static async Task WorkWithRequest(HttpListenerContext context)
+        public static async Task SendMessage(string message, bool isFile)
         {
-            string path = context.Request.Url.AbsolutePath;
-
-            if (path == "/reciveMessage")
+            string extension = ".message";
+            string path = " ";
+            if (isFile)
             {
-                //await ReciveMessage(context);
+                extension = Path.GetExtension(message);
+                path = message;
+                message = " ";
             }
-            else if (path == "/secondUserAvatar")
+
+            await SendMultipartRequest("recieveMessage", path, $"{{\"extension\":\"{extension}\",\"message\":\"{message}\",\"login\":\"{currentLogin}\",\"secondUserLogin\":\"{secondUserLogin}\"}}");
+
+            Window?.tbMessage.Clear();
+            Window.tBlockText.Visibility = Visibility.Visible;
+
+            byte[] bMessage;
+            if (isFile)
             {
-                //await SetSecondUserAvatar(context);
+                bMessage = File.ReadAllBytes(path);
             }
             else
             {
-                context.Response.StatusCode = (int)HttpStatusCode.NotFound;
-                context.Response.Close();
+                bMessage = Encoding.UTF8.GetBytes(message);
             }
-        }
-        
-        static async Task SetSecondUserAvatar(HttpListenerContext context)
-        {
-            string? json;
-            byte[]? file;
-
-            (json, file) = MultipartRequest(context).Result;
-            var jsonData = JsonConvert.DeserializeObject<dynamic>(json);
-
-            string folderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Avatars");
-            string filePath = Path.Combine(folderPath, $"{secondUserLogin}{jsonData.extension}");
-
-            File.WriteAllBytes(filePath, file);
-
-            secondUserAvatarPath = filePath;
+            WorkWithMessage(currentLogin, extension, "000000", bMessage);
         }
 
-        static async Task ReciveMessage(HttpListenerContext context)
+        public static async Task StartReceivingMessages()
         {
-            string? json;
-            byte[]? file;
-
-            (json, file) = MultipartRequest(context).Result;
-            var jsonData = JsonConvert.DeserializeObject<dynamic>(json);
-
-            byte alpha = 255;
-            byte red = 0;
-            byte green = 0;
-            byte blue = 0;
-            if ((string)jsonData.login != currentLogin)
+            while (true)
             {
-                alpha = byte.Parse((string)jsonData.color.Substring(0, 2), System.Globalization.NumberStyles.HexNumber);
-                red = byte.Parse((string)jsonData.color.Substring(2, 2), System.Globalization.NumberStyles.HexNumber);
-                green = byte.Parse((string)jsonData.color.Substring(4, 2), System.Globalization.NumberStyles.HexNumber);
-                blue = byte.Parse((string)jsonData.color.Substring(6, 2), System.Globalization.NumberStyles.HexNumber);
-            }
-
-            ListViewItem item;
-
-            if ((string)jsonData.extension == ".message")
-            {
-                Window?.Dispatcher.Invoke(() =>
+                try
                 {
-                    item = new ListViewItem();
+                    (string? json, byte[]? fileData) = await SendMultipartRequest("messageStream", "", $"{{\"login\":\"{currentLogin}\"}}");
 
-                    item.Content = (string)jsonData.message;
-                    item.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromArgb(alpha, red, green, blue));
-
-                    if ((string)jsonData.login == currentLogin)
+                    if (!string.IsNullOrEmpty(json))
                     {
-                        item.HorizontalAlignment = HorizontalAlignment.Right;
+                        dynamic messageInfo = JsonConvert.DeserializeObject<dynamic>(json);
+                        string extension = (string)messageInfo.extension;
+
+                        if (extension != "empty")
+                        {
+                            WorkWithMessage((string)messageInfo.login, extension, ((string)messageInfo.color)[1..], fileData);
+                        }
                     }
-
-                    Window?.lvChat?.Items.Add(item);
-                    Window?.lvChat?.ScrollIntoView(item);
-                });
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Можливо, сервер не працює зараз: {ex.Message}");
+                    await Task.Delay(5000);
+                }
             }
-        }*/
+        }
 
-        public static async Task<HttpResponseMessage> SendMultipartRequest(string requestType, string filePath, string jsonString)
+        public static async Task<(string? json, byte[]? fileData)> SendMultipartRequest(string requestType, string filePath, string jsonString)
         {
             using var client = new HttpClient();
             using var form = new MultipartFormDataContent();
@@ -166,33 +198,26 @@ namespace SejiClient
                 byte[] fileBytes = File.ReadAllBytes(filePath);
                 var fileContent = new ByteArrayContent(fileBytes);
                 fileContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
-
                 form.Add(fileContent, "file", Path.GetFileName(filePath));
             }
 
             var jsonContent = new StringContent(jsonString, Encoding.UTF8, "application/json");
-
             form.Add(jsonContent, "json");
 
             HttpResponseMessage response = await client.PostAsync(url + requestType, form);
+            if (!response.IsSuccessStatusCode)
+            {
+                return (null, null);
+            }
 
-            return response;
-        }
+            var responseData = await response.Content.ReadAsByteArrayAsync();
 
-
-        static async Task<(string? json, byte[]? fileData)> MultipartRequest(HttpListenerContext context)
-        {
-            var request = context.Request;
-            var contentType = request.ContentType;
+            var contentType = response.Content.Headers.ContentType?.ToString();
+            if (contentType == null) return (null, null);
 
             var match = Regex.Match(contentType, @"boundary=(?:""([^""]+)""|([^;]+))");
             if (!match.Success) return (null, null);
             var boundary = match.Groups[1].Success ? match.Groups[1].Value : match.Groups[2].Value;
-
-            using var stream = request.InputStream;
-            using var memoryStream = new MemoryStream();
-            await stream.CopyToAsync(memoryStream);
-            var data = memoryStream.ToArray();
 
             var boundaryBytes = Encoding.ASCII.GetBytes("--" + boundary);
             var separator = Encoding.ASCII.GetBytes("\r\n\r\n");
@@ -201,24 +226,24 @@ namespace SejiClient
             string? json = null;
             byte[]? fileData = null;
 
-            while (pos < data.Length)
+            while (pos < responseData.Length)
             {
-                int partStart = FindSequence(data, boundaryBytes, pos);
+                int partStart = FindSequence(responseData, boundaryBytes, pos);
                 if (partStart == -1) break;
                 partStart += boundaryBytes.Length + 2;
 
-                int nextPartStart = FindSequence(data, boundaryBytes, partStart);
-                int partEnd = nextPartStart == -1 ? data.Length : nextPartStart - 2;
+                int nextPartStart = FindSequence(responseData, boundaryBytes, partStart);
+                int partEnd = nextPartStart == -1 ? responseData.Length : nextPartStart - 2;
 
-                int headersEnd = FindSequence(data, separator, partStart);
+                int headersEnd = FindSequence(responseData, separator, partStart);
                 if (headersEnd == -1) break;
 
-                var headers = Encoding.UTF8.GetString(data, partStart, headersEnd - partStart);
+                var headers = Encoding.UTF8.GetString(responseData, partStart, headersEnd - partStart);
                 int contentStart = headersEnd + separator.Length;
                 int contentLength = partEnd - contentStart;
 
                 var contentBytes = new byte[contentLength];
-                Array.Copy(data, contentStart, contentBytes, 0, contentLength);
+                Array.Copy(responseData, contentStart, contentBytes, 0, contentLength);
 
                 if (headers.Contains("application/json"))
                 {
@@ -234,6 +259,7 @@ namespace SejiClient
 
             return (json, fileData);
         }
+
 
         static int FindSequence(byte[] source, byte[] sequence, int start)
         {
@@ -252,102 +278,279 @@ namespace SejiClient
             }
             return -1;
         }
-        /*
-        public static async Task GetChat(string secondUser)
+
+        static void WorkWithMessage(string login, string extension, string color, byte[] bMessage)
         {
-            try
+            if (login != secondUserLogin && login != currentLogin)
             {
-                var requestData = new { index = -1, login = currentLogin, secondUserLogin = secondUser };
+                return;
+            }
 
-                var json = System.Text.Json.JsonSerializer.Serialize(requestData);
+            byte alpha = 255;
+            byte red = 0;
+            byte green = 0;
+            byte blue = 0;
+            if (login != currentLogin)
+            {
+                alpha = byte.Parse(color.Substring(0, 2), System.Globalization.NumberStyles.HexNumber);
+                red = byte.Parse(color.Substring(2, 2), System.Globalization.NumberStyles.HexNumber);
+                green = byte.Parse(color.Substring(4, 2), System.Globalization.NumberStyles.HexNumber);
+                blue = byte.Parse(color.Substring(6, 2), System.Globalization.NumberStyles.HexNumber);
+            }
 
-                var content = new StringContent(json, Encoding.UTF8, "application/json");
-                var response = await client.PostAsync("chat", content);
+            string filesFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Files");
+            if (!Directory.Exists(filesFolderPath))
+            {
+                Directory.CreateDirectory(filesFolderPath);
+            }
 
-                json = await response.Content.ReadAsStringAsync();
-                var result = JsonConvert.DeserializeObject<dynamic>(json);
+            ListViewItem item;
 
-                Window?.lvChat?.Items.Clear();
-
-                if(result.messagesNumber == -1)
+            if (login != currentLogin)
+            {
+                Window?.Dispatcher.Invoke(() =>
                 {
-                    Window?.lvChats?.Items.Remove(secondUser);
-                    Window.labelChatName.Content = "Seji";
-                    MessageBox.Show("Такого користувача не існує!");
-                    return;
+                    item = new ListViewItem();
+
+                    StackPanel panel = new StackPanel { Orientation = Orientation.Horizontal };
+
+                    Image img = new Image();
+                    img.Source = new BitmapImage(new Uri(secondUserAvatarPath, UriKind.Absolute));
+                    img.Width = 20;
+
+                    TextBlock textBlock = new TextBlock { Text = $"{login}: ", Margin = new Thickness(5, 0, 0, 0), Foreground = new SolidColorBrush(System.Windows.Media.Color.FromArgb(alpha, red, green, blue)) };
+
+                    panel.Children.Add(img);
+                    panel.Children.Add(textBlock);
+
+                    item.Content = panel;
+
+                    Window?.lvChat?.Items.Add(item);
+                });
+            }
+
+            if (extension == ".message")
+            {
+                string message = Encoding.UTF8.GetString(bMessage);
+
+                Window?.Dispatcher.Invoke(() =>
+                {
+                    item = new ListViewItem();
+
+                    item.Content = message;
+                    item.Foreground = new SolidColorBrush(Color.FromArgb(alpha, red, green, blue));
+
+                    if (login == currentLogin)
+                    {
+                        item.HorizontalAlignment = HorizontalAlignment.Right;
+                    }
+
+                    Window?.lvChat?.Items.Add(item);
+                    Window?.lvChat?.ScrollIntoView(item);
+                });
+            }
+            else
+            {
+                string[] files = Directory.GetFiles(filesFolderPath);
+                string filePath = Path.Combine(filesFolderPath, $"file({files.Length}){extension}");
+                File.WriteAllBytes(filePath, bMessage);
+
+                if (extension == ".png" || extension == ".jpg")
+                {
+                    Window?.Dispatcher.Invoke(() =>
+                    {
+                        item = new ListViewItem();
+
+                        Image img = new Image();
+                        img.Source = new BitmapImage(new Uri(filePath, UriKind.Absolute));
+                        img.MaxHeight = 350;
+                        img.MaxWidth = 350;
+                        item.Content = img;
+                        item.SizeChanged += (sender, args) =>
+                        {
+                            Window.lvChat.ScrollIntoView(Window.lvChat.Items[Window.lvChat.Items.Count - 1]);
+                        };
+
+                        if (login == currentLogin)
+                        {
+                            item.HorizontalAlignment = HorizontalAlignment.Right;
+                        }
+                        else
+                        {
+                            item.HorizontalAlignment = HorizontalAlignment.Left;
+                        }
+
+                        Window?.lvChat?.Items.Add(item);
+                        Window?.lvChat?.ScrollIntoView(item);
+                        ShowFolder(item, filePath);
+                    });
                 }
-
-                string folderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Avatars");
-                if (!Directory.Exists(folderPath))
+                else if (extension == ".mp4" || extension == ".gif" || extension == ".mp3")
                 {
-                    Directory.CreateDirectory(folderPath);
+                    Window?.Dispatcher.Invoke(() =>
+                    {
+                        item = new ListViewItem();
+
+                        MediaElement media = new MediaElement
+                        {
+                            Source = new Uri(filePath, UriKind.Absolute),
+                            LoadedBehavior = MediaState.Manual,
+                            MaxHeight = 350,
+                            MaxWidth = 350
+                        };
+                        media.Pause();
+
+                        StackPanel? panel = null;
+                        if (extension == ".mp3")
+                        {
+                            panel = new StackPanel { Orientation = Orientation.Horizontal };
+
+                            TextBlock textBlock = new TextBlock { Text = "▶", FontFamily = new FontFamily("Segoe UI Emoji") };
+
+                            media.Height = 0;
+
+                            panel.Children.Add(textBlock);
+                            panel.Children.Add(media);
+
+                            item.Content = panel;
+                        }
+                        else
+                        {
+                            item.Content = media;
+                            item.SizeChanged += (sender, args) =>
+                            {
+                                Window.lvChat.ScrollIntoView(Window.lvChat.Items[Window.lvChat.Items.Count - 1]);
+                            };
+                        }
+
+                        WorkWithVideo(item, media, extension, panel);
+
+                        if (login == currentLogin)
+                        {
+                            item.HorizontalAlignment = HorizontalAlignment.Right;
+                        }
+                        else
+                        {
+                            item.HorizontalAlignment = HorizontalAlignment.Left;
+                        }
+
+                        Window?.lvChat?.Items.Add(item);
+                        Window?.lvChat?.ScrollIntoView(item);
+                        ShowFolder(item, filePath);
+                    });
                 }
                 else
                 {
-                    string filePath = Path.Combine(folderPath, $"{secondUser}.jpg");
-                    if (File.Exists(filePath))
+                    Window?.Dispatcher.Invoke(() =>
                     {
-                        secondUserAvatarPath = filePath;
+                        item = new ListViewItem();
+
+                        StackPanel panel = new StackPanel() { Orientation = Orientation.Horizontal };
+                        var bi = new BitmapImage();
+                        bi.BeginInit();
+                        bi.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                        bi.CacheOption = BitmapCacheOption.OnLoad;
+                        bi.UriSource = new Uri("fileicon.png", UriKind.RelativeOrAbsolute);
+                        bi.EndInit();
+                        Image img = new Image()
+                        {
+                            Source = bi,
+                            Height = 25,
+                            Width = 25,
+                        };
+
+                        panel.Children.Add(img);
+                        TextBlock text = new TextBlock()
+                        {
+                            Text = " " + Path.GetFileName(filePath),
+                            VerticalAlignment = VerticalAlignment.Center
+                        };
+                        panel.Children.Add(text);
+                        item.Content = panel;
+
+                        OpenFile(item, filePath);
+
+                        if (login == currentLogin)
+                        {
+                            item.HorizontalAlignment = HorizontalAlignment.Right;
+                        }
+                        else
+                        {
+                            item.HorizontalAlignment = HorizontalAlignment.Left;
+                        }
+
+                        Window?.lvChat?.Items.Add(item);
+                        Window?.lvChat?.ScrollIntoView(item);
+                        ShowFolder(item, filePath);
+                    });
+                }
+            }
+        }
+
+        static void ShowFolder(ListViewItem item, string filePath)
+        {
+            item.PreviewMouseRightButtonDown += (s, e) =>
+            {
+                Process.Start("explorer.exe", $"/select,\"{filePath}\"");
+            };
+        }
+
+        static void OpenFile(ListViewItem item, string filePath)
+        {
+            item.PreviewMouseLeftButtonDown += (s, e) =>
+            {
+                string file = Path.GetFileName(filePath);
+                Process.Start(new ProcessStartInfo(filePath) { UseShellExecute = true });
+            };
+        }
+
+        static void WorkWithVideo(ListViewItem item, MediaElement media, string extension, StackPanel? panel)
+        {
+            bool isPlaying = false;
+            item.PreviewMouseLeftButtonDown += (s, e) =>
+            {
+                Window?.Dispatcher.Invoke(() =>
+                {
+                    if (isPlaying)
+                    {
+                        media.Pause();
+                        isPlaying = false;
+
+                        if (extension == ".mp3")
+                        {
+                            panel.Children.Clear();
+                            TextBlock textBlock = new TextBlock { Text = "▶", FontFamily = new FontFamily("Segoe UI Emoji") };
+
+                            panel.Children.Add(textBlock);
+                            panel.Children.Add(media);
+
+                            item.Content = panel;
+                        }
                     }
                     else
                     {
-                        await client.PostAsync("chat/avatar", null);
+                        media.Play();
+                        isPlaying = true;
+
+                        if (extension == ".mp3")
+                        {
+                            panel.Children.Clear();
+                            TextBlock textBlock = new TextBlock { Text = "⏸" };
+
+                            panel.Children.Add(textBlock);
+                            panel.Children.Add(media);
+
+                            item.Content = panel;
+                        }
                     }
-                }
 
-                secondUserLogin = secondUser;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+                    media.MediaEnded += (s, e) =>
+                    {
+                        media.Position = TimeSpan.Zero;
+                        media.Play();
+                    };
+                });
+            };
         }
-
-        /*
-        public static async Task SendMessage(string message, string secondUser)
-        {
-            try
-            {
-                var requestData = new { sender = currentLogin, receiver = secondUser, message };
-                var json = JsonSerializer.Serialize(requestData);
-                var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-                var response = await client.PostAsync("sendMessage", content);
-                if (response.IsSuccessStatusCode)
-                {
-                    Window?.lvChat?.Items.Add($"You: {message}");
-                }
-            }
-            catch (Exception ex)
-            {
-                Window?.lvChat?.Items.Add(ex.Message);
-            }
-        }
-
-        public static async Task SendFile(string filePath, string secondUser)
-        {
-            try
-            {
-                using var form = new MultipartFormDataContent();
-                using var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
-                var fileContent = new StreamContent(fileStream);
-                fileContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
-
-                form.Add(new StringContent(currentLogin), "sender");
-                form.Add(new StringContent(secondUser), "receiver");
-                form.Add(fileContent, "file", Path.GetFileName(filePath));
-
-                var response = await client.PostAsync("sendFile", form);
-                if (response.IsSuccessStatusCode)
-                {
-                    Window?.lvChat?.Items.Add($"You sent a file: {Path.GetFileName(filePath)}");
-                }
-            }
-            catch (Exception ex)
-            {
-                Window?.lvChat?.Items.Add(ex.Message);
-            }
-        }
-        */
     }
 }

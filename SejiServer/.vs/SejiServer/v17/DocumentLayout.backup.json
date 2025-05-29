@@ -1,18 +1,14 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Gipopotamus\\Desktop\\SejiServer\\",
+  "WorkspaceRootPath": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\Seji\\SejiServer\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{77C97341-D9DB-47FC-AD1A-3DA580918CF0}|SejiServer\\SejiServer.csproj|c:\\users\\gipopotamus\\desktop\\sejiserver\\sejiserver\\workwithdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{77C97341-D9DB-47FC-AD1A-3DA580918CF0}|SejiServer\\SejiServer.csproj|solutionrelative:sejiserver\\workwithdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{77C97341-D9DB-47FC-AD1A-3DA580918CF0}|SejiServer\\SejiServer.csproj|c:\\users\\gipopotamus\\desktop\\sejiserver\\sejiserver\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{77C97341-D9DB-47FC-AD1A-3DA580918CF0}|SejiServer\\SejiServer.csproj|c:\\users\\gipopotamus\\desktop\\cherepok\\kpi\\messangerproject\\seji\\sejiserver\\sejiserver\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{77C97341-D9DB-47FC-AD1A-3DA580918CF0}|SejiServer\\SejiServer.csproj|solutionrelative:sejiserver\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{77C97341-D9DB-47FC-AD1A-3DA580918CF0}|SejiServer\\SejiServer.csproj|c:\\users\\gipopotamus\\desktop\\sejiserver\\sejiserver\\dbclasses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{77C97341-D9DB-47FC-AD1A-3DA580918CF0}|SejiServer\\SejiServer.csproj|solutionrelative:sejiserver\\dbclasses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{77C97341-D9DB-47FC-AD1A-3DA580918CF0}|SejiServer\\SejiServer.csproj|c:\\users\\gipopotamus\\desktop\\cherepok\\kpi\\messangerproject\\seji\\sejiserver\\sejiserver\\workwithdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{77C97341-D9DB-47FC-AD1A-3DA580918CF0}|SejiServer\\SejiServer.csproj|solutionrelative:sejiserver\\workwithdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,43 +18,30 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "DBClasses.cs",
-              "DocumentMoniker": "C:\\Users\\Gipopotamus\\Desktop\\SejiServer\\SejiServer\\DBClasses.cs",
-              "RelativeDocumentMoniker": "SejiServer\\DBClasses.cs",
-              "ToolTip": "C:\\Users\\Gipopotamus\\Desktop\\SejiServer\\SejiServer\\DBClasses.cs",
-              "RelativeToolTip": "SejiServer\\DBClasses.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-26T14:28:46.372Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Gipopotamus\\Desktop\\SejiServer\\SejiServer\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\Seji\\SejiServer\\SejiServer\\Program.cs",
               "RelativeDocumentMoniker": "SejiServer\\Program.cs",
-              "ToolTip": "C:\\Users\\Gipopotamus\\Desktop\\SejiServer\\SejiServer\\Program.cs",
+              "ToolTip": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\Seji\\SejiServer\\SejiServer\\Program.cs",
               "RelativeToolTip": "SejiServer\\Program.cs",
-              "ViewState": "AgIAAFcAAAAAAAAAAAAcwF0AAAApAAAAAAAAAA==",
+              "ViewState": "AgIAAH8AAAAAAAAAAAAiwJ4AAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-11T20:24:35.025Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "WorkWithDB.cs",
-              "DocumentMoniker": "C:\\Users\\Gipopotamus\\Desktop\\SejiServer\\SejiServer\\WorkWithDB.cs",
+              "DocumentMoniker": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\Seji\\SejiServer\\SejiServer\\WorkWithDB.cs",
               "RelativeDocumentMoniker": "SejiServer\\WorkWithDB.cs",
-              "ToolTip": "C:\\Users\\Gipopotamus\\Desktop\\SejiServer\\SejiServer\\WorkWithDB.cs",
+              "ToolTip": "C:\\Users\\Gipopotamus\\Desktop\\CHEREPOK\\KPI\\messangerProject\\Seji\\SejiServer\\SejiServer\\WorkWithDB.cs",
               "RelativeToolTip": "SejiServer\\WorkWithDB.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAdAAAAAAAAAA==",
+              "ViewState": "AgIAACIAAAAAAAAAAAAMwDkAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-11T21:24:04.478Z",
               "EditorCaption": ""

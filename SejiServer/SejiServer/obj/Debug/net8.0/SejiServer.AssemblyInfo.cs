@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SejiServer")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6a004e3d4d1178415c7f5427e0ea33c16c972b68")]
 [assembly: System.Reflection.AssemblyProductAttribute("SejiServer")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SejiServer")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

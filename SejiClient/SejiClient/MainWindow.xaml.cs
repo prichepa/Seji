@@ -70,7 +70,7 @@ namespace SejiClient
 
                 lvChat.Items.Clear();
 
-                //await ServerClient.GetChat(secondUser);
+                await ServerClient.GetChat(secondUser);
             }
         }
 
@@ -85,11 +85,11 @@ namespace SejiClient
 
             if (filePath != null && e.Key == Key.Enter)
             {
-                //await ServerClient.SendFile(filePath, secondUser);
+                await ServerClient.SendMessage(filePath, true);
             }
             else if (tbMessage.Text != "" && e.Key == Key.Enter)
             {
-                //await ServerClient.SendMessage(tbMessage.Text, secondUser);
+                await ServerClient.SendMessage(tbMessage.Text, false);
             }
             else
             {
