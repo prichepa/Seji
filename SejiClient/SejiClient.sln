@@ -5,6 +5,10 @@ VisualStudioVersion = 17.11.35208.52
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SejiClient", "SejiClient\SejiClient.csproj", "{61B4AB3B-B4FB-4495-93C0-B9B4AFEDCA81}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject2", "TestProject2\TestProject2.csproj", "{9B1ED14A-CB94-4D38-A184-95C94C821676}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SejiClientFull", "SejiClientFull", "{2195D89A-49A4-4E7F-ACF8-E1923E757DA7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +19,17 @@ Global
 		{61B4AB3B-B4FB-4495-93C0-B9B4AFEDCA81}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61B4AB3B-B4FB-4495-93C0-B9B4AFEDCA81}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61B4AB3B-B4FB-4495-93C0-B9B4AFEDCA81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B1ED14A-CB94-4D38-A184-95C94C821676}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B1ED14A-CB94-4D38-A184-95C94C821676}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B1ED14A-CB94-4D38-A184-95C94C821676}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B1ED14A-CB94-4D38-A184-95C94C821676}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{61B4AB3B-B4FB-4495-93C0-B9B4AFEDCA81} = {2195D89A-49A4-4E7F-ACF8-E1923E757DA7}
+		{9B1ED14A-CB94-4D38-A184-95C94C821676} = {2195D89A-49A4-4E7F-ACF8-E1923E757DA7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8090353E-95D0-4BF7-A178-3B0C680946AF}

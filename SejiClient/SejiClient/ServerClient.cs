@@ -15,9 +15,9 @@ namespace SejiClient
 {
     public static class ServerClient
     {
-        static readonly string url = "http://26.10.226.173:8080/";
-        static readonly HttpClient client = new HttpClient { BaseAddress = new Uri(url) };
-        static readonly HttpListener listener = new HttpListener();
+        static string url = "http://26.10.226.173:8080/";
+        static HttpClient client = new HttpClient { BaseAddress = new Uri(url) };
+        static HttpListener listener = new HttpListener();
         public static MainWindow? Window { get; set; }
 
         static string? currentLogin;

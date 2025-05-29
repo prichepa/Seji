@@ -1,0 +1,6 @@
+C:\Users\user\Documents\GitHub\Seji\SejiClient\TestProject2\obj\Debug\net8.0\TestProject2.csproj.AssemblyReference.cache
+C:\Users\user\Documents\GitHub\Seji\SejiClient\TestProject2\obj\Debug\net8.0\TestProject2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\Documents\GitHub\Seji\SejiClient\TestProject2\obj\Debug\net8.0\TestProject2.AssemblyInfoInputs.cache
+C:\Users\user\Documents\GitHub\Seji\SejiClient\TestProject2\obj\Debug\net8.0\TestProject2.AssemblyInfo.cs
+C:\Users\user\Documents\GitHub\Seji\SejiClient\TestProject2\obj\Debug\net8.0\TestProject2.csproj.CoreCompileInputs.cache
+C:\Users\user\Documents\GitHub\Seji\SejiClient\TestProject2\obj\Debug\net8.0\TestProject2.sourcelink.json
