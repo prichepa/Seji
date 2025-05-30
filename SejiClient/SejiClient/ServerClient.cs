@@ -15,9 +15,9 @@ namespace SejiClient
 {
     public static class ServerClient
     {
-        static readonly string url = "http://26.10.226.173:8080/";
-        static readonly HttpClient client = new HttpClient { BaseAddress = new Uri(url) };
-        static readonly HttpListener listener = new HttpListener();
+        static string url = "http://26.10.226.173:8080/";
+        static HttpClient client = new HttpClient { BaseAddress = new Uri(url) };
+        static HttpListener listener = new HttpListener();
         public static MainWindow? Window { get; set; }
 
         static string? currentLogin;
@@ -57,6 +57,11 @@ namespace SejiClient
                     }
 
                     _ = StartReceivingMessages();
+
+                    string lastUserLoginDataFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "LastUserLoginData.json");
+                    var writer = File.CreateText(lastUserLoginDataFilePath);
+                    writer.Write($"{{\"login\":\"{login}\",\"password\":\"{password}\"}}");
+                    writer.Close();
 
                     return true;
                 }
@@ -283,6 +288,11 @@ namespace SejiClient
         {
             if (login != secondUserLogin && login != currentLogin)
             {
+                if (!Window.lvChats.Items.Contains(login))
+                {
+                    Window.lvChats.Items.Add(login);
+                }
+
                 return;
             }
 

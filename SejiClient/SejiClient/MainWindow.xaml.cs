@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using Newtonsoft.Json;
 
 namespace SejiClient
 {
@@ -24,6 +25,18 @@ namespace SejiClient
             bi.EndInit();
 
             bgImage.Source = bi;
+
+            string lastUserLoginDataFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "LastUserLoginData.json");
+            if (File.Exists(lastUserLoginDataFilePath))
+            {
+                var result = JsonConvert.DeserializeObject<dynamic>(File.ReadAllText(lastUserLoginDataFilePath));
+
+                loginTBox.Text = result.login;
+                passwordTBox.Text = result.password;
+
+                loginTBlock.Visibility = Visibility.Hidden;
+                passwordTBlock.Visibility = Visibility.Hidden;
+            }
         }
 
         private void Login_KeyDown(object sender, KeyEventArgs e)
