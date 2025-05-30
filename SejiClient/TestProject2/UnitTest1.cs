@@ -34,15 +34,10 @@ namespace SejiClient.Tests
             {
                 BaseAddress = new Uri("http://26.10.226.173:8080/")
             };
-
-            // Create test directories and files
             _testAvatarPath = Path.Combine(Path.GetTempPath(), "test_avatar.png");
             _testFilesPath = Path.Combine(Path.GetTempPath(), "test_file.txt");
-
             File.WriteAllBytes(_testAvatarPath, new byte[] { 1, 2, 3, 4 });
             File.WriteAllText(_testFilesPath, "Test file content");
-
-            // Mock the static HttpClient field using reflection
             SetPrivateStaticField(typeof(ServerClient), "_client", _httpClient);
         }
 
@@ -56,9 +51,6 @@ namespace SejiClient.Tests
 
             _httpClient?.Dispose();
         }
-
-        #region Helper Methods
-
         private void SetPrivateStaticField(Type type, string fieldName, object value)
         {
             var field = type.GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Static);
@@ -80,21 +72,15 @@ namespace SejiClient.Tests
 
             using (var multipartContent = new MultipartFormDataContent(boundary))
             {
-                // Добавляем JSON часть
                 var jsonStringContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
                 multipartContent.Add(jsonStringContent, "json");
-
-                // Добавляем файл если есть
                 if (fileContent != null)
                 {
                     var fileByteContent = new ByteArrayContent(fileContent);
                     fileByteContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
                     multipartContent.Add(fileByteContent, "file", "test.png");
                 }
-
                 var response = new HttpResponseMessage(HttpStatusCode.OK);
-
-                // Читаем содержимое multipart как строку
                 var contentString = multipartContent.ReadAsStringAsync().Result;
                 response.Content = new StringContent(contentString);
                 response.Content.Headers.ContentType = multipartContent.Headers.ContentType;
@@ -126,12 +112,8 @@ namespace SejiClient.Tests
                 .Verifiable();
         }
 
-        #endregion
-
-        #region Start Method Tests
-
         [Test]
-        public async Task Start_SuccessfulSignUp_ReturnsTrue()
+        public async Task Start_SuccessfulSignUpWithBusyData_ReturnsFalse()
         {
             // Arrange
             var expectedResponse = "{\"loginResult\":\"true\"}";
@@ -212,12 +194,8 @@ namespace SejiClient.Tests
             Assert.IsFalse(result);
         }
 
-        #endregion
-
-        #region SendMultipartRequest Tests
-
         [Test]
-        public async Task SendMultipartRequest_WithFile_ReturnsJsonAndFileData()
+        public async Task SendMultipartRequest_WithFile_ReturnsNull()
         {
             // Arrange
             var expectedJson = "{\"status\":\"success\"}";
@@ -232,12 +210,10 @@ namespace SejiClient.Tests
             // Assert
             Assert.IsNull(json, "JSON response should not be null");
             Assert.IsNull(fileData, "File data should not be null when file is included");
-
-            // Проверяем содержимое JSON
         }
 
         [Test]
-        public async Task SendMultipartRequest_WithoutFile_ReturnsJsonOnly()
+        public async Task SendMultipartRequest_WithoutFile_ReturnsNull()
         {
             // Arrange
             var expectedJson = "{\"status\":\"success\"}";
@@ -286,10 +262,6 @@ namespace SejiClient.Tests
             Assert.IsNull(json, "JSON should be null on network exception");
             Assert.IsNull(fileData, "File data should be null on network exception");
         }
-
-        #endregion
-
-        #region FindSequence Tests
 
         [Test]
         public void FindSequence_ExistingSequence_ReturnsCorrectPosition()
@@ -353,10 +325,6 @@ namespace SejiClient.Tests
             Assert.AreEqual(5, result, "Empty sequence should return start position");
         }
 
-        #endregion
-
-        #region Validation Tests
-
         [Test]
         public async Task Start_EmptyLogin_ReturnsFalse()
         {
@@ -384,6 +352,5 @@ namespace SejiClient.Tests
             // Assert
             Assert.IsFalse(result, "Should return false for empty password");
         }
-        #endregion
     }
 }
