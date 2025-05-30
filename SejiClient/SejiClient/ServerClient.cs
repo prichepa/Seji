@@ -26,7 +26,7 @@ namespace SejiClient
 
         public static async Task<bool> Start(string login, string password, string? avatarPath, char entrType)
         {
-            Window = Application.Current.MainWindow as MainWindow;
+            //Window = Application.Current.MainWindow as MainWindow;
             try
             {
                 HttpResponseMessage response;

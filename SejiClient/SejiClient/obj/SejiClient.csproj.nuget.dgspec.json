@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\user\\Documents\\GitHub\\Seji\\SejiClient\\SejiClient\\SejiClient.csproj": {}
+    "C:\\Uni\\Skibidi\\Seji\\SejiClient\\SejiClient\\SejiClient.csproj": {}
   },
   "projects": {
-    "C:\\Users\\user\\Documents\\GitHub\\Seji\\SejiClient\\SejiClient\\SejiClient.csproj": {
+    "C:\\Uni\\Skibidi\\Seji\\SejiClient\\SejiClient\\SejiClient.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\user\\Documents\\GitHub\\Seji\\SejiClient\\SejiClient\\SejiClient.csproj",
+        "projectUniqueName": "C:\\Uni\\Skibidi\\Seji\\SejiClient\\SejiClient\\SejiClient.csproj",
         "projectName": "SejiClient",
-        "projectPath": "C:\\Users\\user\\Documents\\GitHub\\Seji\\SejiClient\\SejiClient\\SejiClient.csproj",
-        "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\user\\Documents\\GitHub\\Seji\\SejiClient\\SejiClient\\obj\\",
+        "projectPath": "C:\\Uni\\Skibidi\\Seji\\SejiClient\\SejiClient\\SejiClient.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "C:\\Uni\\Skibidi\\Seji\\SejiClient\\SejiClient\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "G:\\Новая папка (3)\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -43,8 +44,7 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.100"
+        }
       },
       "frameworks": {
         "net8.0-windows7.0": {
@@ -82,7 +82,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.407/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

@@ -1,29 +1,29 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\user\\Documents\\GitHub\\Seji\\SejiClient\\",
+  "WorkspaceRootPath": "C:\\Uni\\Skibidi\\Seji\\SejiClient\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9B1ED14A-CB94-4D38-A184-95C94C821676}|TestProject2\\TestProject2.csproj|c:\\users\\user\\documents\\github\\seji\\sejiclient\\testproject2\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{9B1ED14A-CB94-4D38-A184-95C94C821676}|TestProject2\\TestProject2.csproj|c:\\uni\\skibidi\\seji\\sejiclient\\testproject2\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9B1ED14A-CB94-4D38-A184-95C94C821676}|TestProject2\\TestProject2.csproj|solutionrelative:testproject2\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9B1ED14A-CB94-4D38-A184-95C94C821676}|TestProject2\\TestProject2.csproj|c:\\users\\user\\documents\\github\\seji\\sejiclient\\testproject2\\testproject2.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{9B1ED14A-CB94-4D38-A184-95C94C821676}|TestProject2\\TestProject2.csproj|solutionrelative:testproject2\\testproject2.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{61B4AB3B-B4FB-4495-93C0-B9B4AFEDCA81}|SejiClient\\SejiClient.csproj|c:\\users\\user\\documents\\github\\seji\\sejiclient\\sejiclient\\serverclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{61B4AB3B-B4FB-4495-93C0-B9B4AFEDCA81}|SejiClient\\SejiClient.csproj|c:\\uni\\skibidi\\seji\\sejiclient\\sejiclient\\serverclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{61B4AB3B-B4FB-4495-93C0-B9B4AFEDCA81}|SejiClient\\SejiClient.csproj|solutionrelative:sejiclient\\serverclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{61B4AB3B-B4FB-4495-93C0-B9B4AFEDCA81}|SejiClient\\SejiClient.csproj|c:\\users\\user\\documents\\github\\seji\\sejiclient\\sejiclient\\sejiclient.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "AbsoluteMoniker": "D:0:0:{9B1ED14A-CB94-4D38-A184-95C94C821676}|TestProject2\\TestProject2.csproj|c:\\uni\\skibidi\\seji\\sejiclient\\testproject2\\testproject2.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{9B1ED14A-CB94-4D38-A184-95C94C821676}|TestProject2\\TestProject2.csproj|solutionrelative:testproject2\\testproject2.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{61B4AB3B-B4FB-4495-93C0-B9B4AFEDCA81}|SejiClient\\SejiClient.csproj|c:\\uni\\skibidi\\seji\\sejiclient\\sejiclient\\sejiclient.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{61B4AB3B-B4FB-4495-93C0-B9B4AFEDCA81}|SejiClient\\SejiClient.csproj|solutionrelative:sejiclient\\sejiclient.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{61B4AB3B-B4FB-4495-93C0-B9B4AFEDCA81}|SejiClient\\SejiClient.csproj|c:\\users\\user\\documents\\github\\seji\\sejiclient\\sejiclient\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{61B4AB3B-B4FB-4495-93C0-B9B4AFEDCA81}|SejiClient\\SejiClient.csproj|c:\\uni\\skibidi\\seji\\sejiclient\\sejiclient\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{61B4AB3B-B4FB-4495-93C0-B9B4AFEDCA81}|SejiClient\\SejiClient.csproj|solutionrelative:sejiclient\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{61B4AB3B-B4FB-4495-93C0-B9B4AFEDCA81}|SejiClient\\SejiClient.csproj|c:\\users\\user\\documents\\github\\seji\\sejiclient\\sejiclient\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{61B4AB3B-B4FB-4495-93C0-B9B4AFEDCA81}|SejiClient\\SejiClient.csproj|c:\\uni\\skibidi\\seji\\sejiclient\\sejiclient\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{61B4AB3B-B4FB-4495-93C0-B9B4AFEDCA81}|SejiClient\\SejiClient.csproj|solutionrelative:sejiclient\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
@@ -34,42 +34,33 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{e5c86464-96be-4d7c-9a8b-abcb3bbf5f92}"
-            },
-            {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "TestProject2",
-              "DocumentMoniker": "C:\\Users\\user\\Documents\\GitHub\\Seji\\SejiClient\\TestProject2\\TestProject2.csproj",
+              "DocumentIndex": 2,
+              "Title": "TestProject2.csproj",
+              "DocumentMoniker": "C:\\Uni\\Skibidi\\Seji\\SejiClient\\TestProject2\\TestProject2.csproj",
               "RelativeDocumentMoniker": "TestProject2\\TestProject2.csproj",
-              "ToolTip": "C:\\Users\\user\\Documents\\GitHub\\Seji\\SejiClient\\TestProject2\\TestProject2.csproj",
+              "ToolTip": "C:\\Uni\\Skibidi\\Seji\\SejiClient\\TestProject2\\TestProject2.csproj",
               "RelativeToolTip": "TestProject2\\TestProject2.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-05-29T13:17:13.255Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-29T13:17:13.255Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "UnitTest1.cs",
-              "DocumentMoniker": "C:\\Users\\user\\Documents\\GitHub\\Seji\\SejiClient\\TestProject2\\UnitTest1.cs",
+              "DocumentMoniker": "C:\\Uni\\Skibidi\\Seji\\SejiClient\\TestProject2\\UnitTest1.cs",
               "RelativeDocumentMoniker": "TestProject2\\UnitTest1.cs",
-              "ToolTip": "C:\\Users\\user\\Documents\\GitHub\\Seji\\SejiClient\\TestProject2\\UnitTest1.cs*",
+              "ToolTip": "C:\\Uni\\Skibidi\\Seji\\SejiClient\\TestProject2\\UnitTest1.cs*",
               "RelativeToolTip": "TestProject2\\UnitTest1.cs*",
-              "ViewState": "AgIAAIMBAAAAAAAAAAAiwKABAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAIgAAAAAAAAAAIAwwJIAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-29T13:14:55.891Z",
               "EditorCaption": ""
@@ -77,50 +68,47 @@
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "SejiClient",
-              "DocumentMoniker": "C:\\Users\\user\\Documents\\GitHub\\Seji\\SejiClient\\SejiClient\\SejiClient.csproj",
+              "Title": "SejiClient.csproj",
+              "DocumentMoniker": "C:\\Uni\\Skibidi\\Seji\\SejiClient\\SejiClient\\SejiClient.csproj",
               "RelativeDocumentMoniker": "SejiClient\\SejiClient.csproj",
-              "ToolTip": "C:\\Users\\user\\Documents\\GitHub\\Seji\\SejiClient\\SejiClient\\SejiClient.csproj",
+              "ToolTip": "C:\\Uni\\Skibidi\\Seji\\SejiClient\\SejiClient\\SejiClient.csproj",
               "RelativeToolTip": "SejiClient\\SejiClient.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-05-29T13:14:02.532Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-29T13:14:02.532Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
               "Title": "MainWindow.xaml",
-              "DocumentMoniker": "C:\\Users\\user\\Documents\\GitHub\\Seji\\SejiClient\\SejiClient\\MainWindow.xaml",
+              "DocumentMoniker": "C:\\Uni\\Skibidi\\Seji\\SejiClient\\SejiClient\\MainWindow.xaml",
               "RelativeDocumentMoniker": "SejiClient\\MainWindow.xaml",
-              "ToolTip": "C:\\Users\\user\\Documents\\GitHub\\Seji\\SejiClient\\SejiClient\\MainWindow.xaml",
+              "ToolTip": "C:\\Uni\\Skibidi\\Seji\\SejiClient\\SejiClient\\MainWindow.xaml",
               "RelativeToolTip": "SejiClient\\MainWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-03-11T17:57:08.267Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-11T17:57:08.267Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
               "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\user\\Documents\\GitHub\\Seji\\SejiClient\\SejiClient\\MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Uni\\Skibidi\\Seji\\SejiClient\\SejiClient\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "SejiClient\\MainWindow.xaml.cs",
-              "ToolTip": "C:\\Users\\user\\Documents\\GitHub\\Seji\\SejiClient\\SejiClient\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Uni\\Skibidi\\Seji\\SejiClient\\SejiClient\\MainWindow.xaml.cs",
               "RelativeToolTip": "SejiClient\\MainWindow.xaml.cs",
-              "ViewState": "AgIAADYAAAAAAAAAAIBJwF8AAAA6AAAAAAAAAA==",
+              "ViewState": "AgIAADMAAAAAAAAAAIBZwF8AAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-11T17:57:08.114Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-11T17:57:08.114Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "ServerClient.cs",
-              "DocumentMoniker": "C:\\Users\\user\\Documents\\GitHub\\Seji\\SejiClient\\SejiClient\\ServerClient.cs",
+              "DocumentMoniker": "C:\\Uni\\Skibidi\\Seji\\SejiClient\\SejiClient\\ServerClient.cs",
               "RelativeDocumentMoniker": "SejiClient\\ServerClient.cs",
-              "ToolTip": "C:\\Users\\user\\Documents\\GitHub\\Seji\\SejiClient\\SejiClient\\ServerClient.cs",
+              "ToolTip": "C:\\Uni\\Skibidi\\Seji\\SejiClient\\SejiClient\\ServerClient.cs",
               "RelativeToolTip": "SejiClient\\ServerClient.cs",
-              "ViewState": "AgIAAOsBAAAAAAAAAAAAABwCAAA2AAAAAAAAAA==",
+              "ViewState": "AgIAABQAAAAAAAAAAAASwBoAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-11T18:06:08.92Z",
               "EditorCaption": ""
